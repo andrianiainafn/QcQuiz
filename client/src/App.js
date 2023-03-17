@@ -1,8 +1,11 @@
+import AuthContext from "./context/AuthContext";
+import AppRoute from "./routes";
+
 function App() {
   return (
-    <div className="">
-
-    </div>
+      <AuthContext>
+        <AppRoute/>
+      </AuthContext>      
   );
 }
 
