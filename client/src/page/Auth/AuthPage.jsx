@@ -4,12 +4,12 @@ import Illustration from '../../features/Auth/components/elements/Illustration'
 
 function AuthPage() {
   return (
-    <div>
-      <div className="">
-        <div className="">
+    <div className='h-full mt-0 md:mt-10'>
+      <div className="flex justify-around items-center h-full ">
+        <div className="w-20% hidden md:block ">
             <Illustration/>
         </div>
-        <div className="">
+        <div className="w-40%  ">
             <Outlet/>
         </div>
       </div>
