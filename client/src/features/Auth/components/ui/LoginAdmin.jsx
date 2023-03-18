@@ -51,8 +51,8 @@ function LoginAdmin() {
       navigate('/')
   }
   return (
-    <div>
-      <div className="fex justify-start   items-start flex-col  md:w-[80%] space-y-10">
+    <div className='md:mt-16 mt-[20vh]'>
+      <div className="fex justify-center   items-center mx-auto flex-col w-[80%]   md:w-[80%] space-y-10">
         <div className="text-center text-2xl">
           <h3>Enter you Choice</h3>
         </div>
@@ -93,7 +93,7 @@ function LoginAdmin() {
                         name="identifiant"
                         error={!!touched.identifiant && !!errors.identifiant}
                         helperText={touched.identifiant && errors.identifiant}
-                        fullWidth variant='outlined'  label='Email or Password' type='identifiant'
+                        fullWidth variant='outlined'  label='Email' type='identifiant'
                         InputProps={{
                           startAdornment:(
                             <InputAdornment position='start'>

@@ -5,7 +5,7 @@ import ListOfQcm from '../features/Students/components/ListOfQcm'
 function StudentsLayout() {
   return (
     <Routes>
-        <Route path='/qcm' element={<ListOfQcm/>} />
+        <Route path='' element={<ListOfQcm/>} />
     </Routes>
   )
 }

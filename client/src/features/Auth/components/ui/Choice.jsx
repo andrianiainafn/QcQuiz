@@ -7,6 +7,9 @@ function Choice() {
   const HandleClickBack = ()=>{
       navigate('/')
   }
+  const HandleClickStudents = ()=>{
+    navigate('/auth/login/students')
+  }
   const HandleClickAdmin = ()=>{
       navigate('/auth/login/admin')
   }
@@ -20,7 +23,7 @@ function Choice() {
             <button onClick={HandleClickAdmin} className='bg-[#38C172] text-[#f2f2f2] w-[60vw] md:w-[20vw] p-4 rounded-lg'>ADMINISTRATOR</button>
         </div>
         <div className="">
-          <button className='bg-[#38C172] text-[#f2f2f2] w-[60vw] md:w-[20vw] p-4 rounded-lg'>STUDENTS</button>
+          <button onClick={HandleClickStudents} className='bg-[#38C172] text-[#f2f2f2] w-[60vw] md:w-[20vw] p-4 rounded-lg'>STUDENTS</button>
         </div>
         <div className="flex justify-end cursor-pointer" onClick={HandleClickBack}>
           <div className="flex justify-between items-center text-xl mx-3">
