@@ -9,11 +9,11 @@ import DashboardLayout from '../page/Admin/DashboardLayout'
 function AdminLayout() {
   return (
     <Routes>
-        <Route path='/dashboard' element={<DashboardLayout/>}>
+        <Route path='/dashboard/student' element={<DashboardLayout/>}>
             <Route path='' index={true} element={<History/>}/>
-            <Route path='student/list' element={<ListOfStudents/>}/>
-            <Route path='student/create' element={<AddStudents/>}/>
-            <Route path='student/:id/edit' element={<UpdateStudents/>}/>
+            <Route path='list' element={<ListOfStudents/>}/>
+            <Route path='create' element={<AddStudents/>}/>
+            <Route path=':id/edit' element={<UpdateStudents/>}/>
         </Route>
     </Routes>
   )

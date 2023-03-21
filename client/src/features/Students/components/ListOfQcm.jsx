@@ -104,7 +104,7 @@ function ListOfQcm() {
           </div>
         </div>
         <div className=" mt-12 w-[40%] flex mx-auto justify-between items-center ">
-          <div onClick={Handleclick} className={activeClass} id="A"> 
+          <div onClick={Handleclick} className={nonActiveClass} id="A"> 
                 A
           </div>
           <div onClick={Handleclick} className={nonActiveClass} id="B">

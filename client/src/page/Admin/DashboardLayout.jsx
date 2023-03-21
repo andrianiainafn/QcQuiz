@@ -5,11 +5,11 @@ import SideBar from '../../features/Admin/components/ui/SideBar'
 function DashboardLayout() {
   return (
     <div>
-        <div className="">
-            <div className="">
+        <div className="flex justify-between items-center w-full">
+            <div className="w-[10%]">
                 <SideBar/>
             </div>
-            <div className="">
+            <div className="w-[85%]">
                 <Outlet/>
             </div>
         </div>
