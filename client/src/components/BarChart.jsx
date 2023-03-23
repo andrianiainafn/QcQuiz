@@ -4,9 +4,7 @@ import {mockBarData as data} from '../data/mockData'
 
 const BarChart=() => {
     return (
-    <>
-    <p>Text</p>
-    
+    <>    
     <ResponsiveBar
         data={data}
         keys={[
@@ -22,7 +20,7 @@ const BarChart=() => {
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'nivo' }}
+        colors={{ scheme: 'purple_blue_green' }}
         defs={[
             {
                 id: 'dots',
@@ -72,7 +70,7 @@ const BarChart=() => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'country',
+            legend: 'Niveau',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -80,7 +78,7 @@ const BarChart=() => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'food',
+            legend: 'Note',
             legendPosition: 'middle',
             legendOffset: -40
         }}
