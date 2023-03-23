@@ -7,6 +7,7 @@
     $connect = new ConnectToDb();
     $pdo = $connect->connect();
    try{
+    
        $user_info = json_decode(file_get_contents('php://input'));
         if($user_info){
             $existing_user ="SELECT * FROM etudiant WHERE num_etudiant = :num_etudiant";
