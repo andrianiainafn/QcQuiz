@@ -1,13 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SideBar from '../../features/Admin/components/ui/SideBar'
+import SideBarAdmin from '../../features/Admin/components/elements/SideBarAdmin'
 
 function DashboardLayout() {
   return (
     <div>
-        <div className="flex justify-between items-center w-full">
-            <div className="w-[10%]">
-                <SideBar/>
+        <div className="flex justify-between  w-full">
+            <div>
+                <SideBarAdmin/>
             </div>
             <div className="w-[85%]">
                 <Outlet/>

@@ -1,19 +1,23 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import AddStudents from '../features/Admin/components/ui/AddStudents'
-import History from '../features/Admin/components/ui/History'
-import ListOfStudents from '../features/Admin/components/ui/ListOfStudents'
-import UpdateStudents from '../features/Admin/components/ui/UpdateStudents'
+import AddQcm from '../features/Admin/components/ui/Qcm/AddQcm'
+import ListOfQcm from '../features/Admin/components/ui/Qcm/ListOfQcm'
+import AddStudents from '../features/Admin/components/ui/Students/AddStudents'
+import History from '../features/Admin/components/ui/Students/History'
+import ListOfStudents from '../features/Admin/components/ui/Students/ListOfStudents'
+import UpdateStudents from '../features/Admin/components/ui/Students/UpdateStudents'
 import DashboardLayout from '../page/Admin/DashboardLayout'
 
 function AdminLayout() {
   return (
     <Routes>
-        <Route path='/dashboard/student' element={<DashboardLayout/>}>
+        <Route path='/dashboard' element={<DashboardLayout/>}>
             <Route path='' index={true} element={<History/>}/>
-            <Route path='list' element={<ListOfStudents/>}/>
-            <Route path='create' element={<AddStudents/>}/>
-            <Route path=':id/edit' element={<UpdateStudents/>}/>
+            <Route path='student/list' element={<ListOfStudents/>}/>
+            <Route path='student/create' element={<AddStudents/>}/>
+            <Route path='student/:id/edit' element={<UpdateStudents/>}/>
+            <Route path='qcm/list' element={<ListOfQcm/>}/>
+            <Route path='qcm/create' element={<AddQcm/>}/>
         </Route>
     </Routes>
   )
