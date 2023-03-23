@@ -3,7 +3,18 @@ import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
-  const activeClass = "text-white w-[20%] p-2 cursor-pointer flex justify-center items-center bg-[#38c172] rounded-3xl"
+  const [response,setResponse] = useState({
+    question1: null,
+    question2: null,
+    question3: null,
+    question4: null,
+    question5: null,
+    question6: null,
+    question7: null,
+    question8: null,
+    question8: null,
+    question10: null,
+  })
   const nonActiveClass = "text-[#38c172] w-[20%] p-2 cursor-pointer border border-[#38c172] flex justify-center items-center rounded-3xl"
   const Handleclick = (e) =>{
     if(e.target.classList.contains('text-[#38c172]')){
@@ -17,8 +28,42 @@ function ListOfQcm() {
         e.target.classList.add('text-white')
         e.target.classList.add('bg-[#38c172]')
         console.log(e.target.classList)
-        console.log(e.target.getAttribute('id'))
-        // modifyPreferance({...preferance,orientation:e.target.getAttribute('id')})
+        console.log(e.target.getAttribute('id').split(''))
+        const responsArray = e.target.getAttribute('id').split('')
+        switch(responsArray[1]){
+            case '1':
+              setResponse({...response,question1:responsArray[0]})
+              break
+            case "2":
+              setResponse({...response,question2:responsArray[0]})
+              break
+            case "3":
+              setResponse({...response,question3:responsArray[0]})
+              break
+            case "4":
+              setResponse({...response,question4:responsArray[0]})
+              break
+            case "5":
+              setResponse({...response,question5:responsArray[0]})
+              break
+            case "6":
+              setResponse({...response,question6:responsArray[0]})
+              break
+            case "7":
+              setResponse({...response,question7:responsArray[0]})
+              break
+            case "8":
+              setResponse({...response,question8:responsArray[0]})
+              break
+            case "9":
+              setResponse({...response,question9:responsArray[0]})
+              break
+            case "10":
+              setResponse({...response,question10:responsArray[0]})
+              break
+            default:
+              console.log("Inaccepted response")
+        }
       }
     }
 }
@@ -33,10 +78,10 @@ function ListOfQcm() {
     if(anchor === null){
       return
     }
-    anchor.parentElement.parentElement.querySelectorAll('.active').forEach(node=>{
-      node.classList.remove('active')
+    anchor.parentElement.parentElement.querySelectorAll('.activeQ').forEach(node=>{
+      node.classList.remove('activeQ')
     })
-    anchor.parentElement.classList.add('active')
+    anchor.parentElement.classList.add('activeQ')
   } 
   const callback = (entries,observer)=>{
     entries.forEach(entry=>{
@@ -71,8 +116,11 @@ function ListOfQcm() {
       })
     }
   },[valueOfScroll])
+  const HandleClikSubmit = ()=>{
+    console.log(response)
+  }
   return (
-    <div className='relative h-screen bg-[#C3F3D9] scroll-smooth overflow-y-scroll snap-y snap-mandatory' 
+    <div className='relative h-screen bg-[#001E3C] scroll-smooth overflow-y-scroll snap-y snap-mandatory' 
     onScroll={HandleScroll} ref={ref} >
       <div className="fixed flex flex-col space-y-3  h-[24vh] right-16 mt-[11%]">
             {
@@ -85,11 +133,11 @@ function ListOfQcm() {
       </div>
      {
       numQcm.map(elem=>(
-        <div key={elem} id={elem} className="flex snap-center  flex-col h-screen items-center justify-center bg-[#C3F3D9] " data-spy>
-        <div className="text-start text-2xl">
+        <div key={elem} id={elem} className="flex snap-center  flex-col h-screen items-center justify-center bg-[#001E3C] " data-spy>
+        <div className="text-start text-2xl text-[#f2f2f2]">
             <h1>{elem}<ArrowRightAltOutlinedIcon/> Que signifie l' acronyme PHP ? </h1>
         </div>
-        <div className="mt-5 text-xl flex flex-col space-y-2">
+        <div className="mt-5 text-xl flex flex-col space-y-2 text-[#f2f2f2]">
           <div className="">
             A- Hypertext Preprocessor
           </div>
@@ -104,16 +152,16 @@ function ListOfQcm() {
           </div>
         </div>
         <div className=" mt-12 w-[40%] flex mx-auto justify-between items-center ">
-          <div onClick={Handleclick} className={nonActiveClass} id="A"> 
+          <div onClick={Handleclick} className={nonActiveClass} id={"A" + elem }> 
                 A
           </div>
-          <div onClick={Handleclick} className={nonActiveClass} id="B">
+          <div onClick={Handleclick} className={nonActiveClass} id={"B" + elem }>
               B
           </div>
-          <div  onClick={Handleclick} className={nonActiveClass} id="C">
+          <div  onClick={Handleclick} className={nonActiveClass} id={"C" + elem }>
               C
           </div>
-          <div  onClick={Handleclick} className={nonActiveClass} id="D">
+          <div  onClick={Handleclick} className={nonActiveClass} id={"D" + elem }>
               D
           </div>
         </div>

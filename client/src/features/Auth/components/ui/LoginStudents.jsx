@@ -14,6 +14,14 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: '#332fd0',
+    backGroundColor:'#66ACFF'
+  },
+  '& label':{
+      color:"#f2f2f2"
+  },
+  '& label.Mui-focused':{
+    color:"#f2f2f2",
+    backGroundColor:'#66ACFF'
   },
   '& .MuiInput-underline:after': {
     borderBottomColor: '#332fd0',
@@ -21,13 +29,19 @@ const CssTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       height: '8vh',
+      color:'#66ACFF',
+      borderColor:'#eee',
+      backGroundColor:'#66ACFF'
     },
     '&:hover fieldset': {
       borderColor: '#fb2576',
+      backGroundColor:'#66ACFF'
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#332fd0',
+      borderColor: '#66ACFF',
+      backGroundColor:'#66ACFF'
     },
+    
   },
 });
 function LoginStudents() {
@@ -39,10 +53,10 @@ function LoginStudents() {
       navigate('/students')
   }
   return (
-    <div className='md:mt-16 mt-[20vh] '>
+    <div className='md:mt-16 mt-[20vh] text-[#f2f2f2] '>
       <div className="fex justify-center   items-center mx-auto flex-col w-[80%]   md:w-[80%] space-y-10">
         <div className="text-center text-2xl">
-          <h3>LOGIN</h3>
+          <h3 className='text-[#38C172]'>LOGIN</h3>
         </div>
         <Formik
                     onSubmit={handleFormSubmit}
@@ -75,6 +89,7 @@ function LoginStudents() {
                       }  
                     onSubmit={handleSubmit} className='space-y-5'>
                         <CssTextField 
+                        sx={{color:'#f2f2f2'}}
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.identifiant}
@@ -85,7 +100,7 @@ function LoginStudents() {
                         InputProps={{
                           startAdornment:(
                             <InputAdornment position='start'>
-                              <PersonOutlinedIcon/>
+                              <PersonOutlinedIcon sx={{color:"#eee"}}/>
                             </InputAdornment>
                           )
                         }}
@@ -101,7 +116,7 @@ function LoginStudents() {
                         InputProps={{
                           startAdornment:(
                             <InputAdornment position='start'>
-                              <PersonOutlinedIcon/>
+                              <PersonOutlinedIcon sx={{color:"#eee"}}/>
                             </InputAdornment>
                           )
                         }}
@@ -150,7 +165,7 @@ function LoginStudents() {
 export default LoginStudents
 
 const checkoutSchema = yup.object().shape({
-  identifiant: yup.string().required("required"),
+  identifiant: yup.string().email("invalid email").required('required'),
   matricule: yup.string().required("required"),
   rememberMe: yup.boolean()
 });

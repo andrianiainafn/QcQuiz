@@ -51,9 +51,9 @@ function LoginAdmin() {
       navigate('/')
   }
   return (
-    <div className='md:mt-16 mt-[20vh]'>
+    <div className='md:mt-16 mt-[20vh] '>
       <div className="fex justify-center   items-center mx-auto flex-col w-[80%]   md:w-[80%] space-y-10">
-        <div className="text-center text-2xl">
+        <div className="text-center text-2xl text-[#f2f2f2]">
           <h3>Enter you Choice</h3>
         </div>
         <Formik

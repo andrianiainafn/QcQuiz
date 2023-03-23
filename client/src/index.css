@@ -3,6 +3,28 @@
 @tailwind utilities;
 
 .active{
-    background-color: #38c172;
+    /* background-color: #38c172; */
     color:#fff
+}
+
+.link{
+    position: relative;
+}
+.link::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #1fa1b8;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+}
+.link:hover::after{
+    transform: scaleX(1);
+}
+.activeQ{
+        background-color: #38c172;
+        color:#fff
 }

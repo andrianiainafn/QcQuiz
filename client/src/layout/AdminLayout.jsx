@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import BarChart from '../components/BarChart'
 import AddQcm from '../features/Admin/components/ui/Qcm/AddQcm'
 import ListOfQcm from '../features/Admin/components/ui/Qcm/ListOfQcm'
 import AddStudents from '../features/Admin/components/ui/Students/AddStudents'
