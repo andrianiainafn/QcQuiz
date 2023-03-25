@@ -9,7 +9,7 @@ try{
  $gradeChoice= isset($_GET['niveau']);
  $connect = new ConnectToDb();
  $pdo = $connect->connect();
- $sql = "SELECT * FROM qcm WHERE Niveau :grade  LIMIT 10";
+ $sql = "SELECT * FROM qcm WHERE Niveau =:grade  LIMIT 10";
  $result = $pdo->query($sql);  
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':grade',$gradeChoice);
