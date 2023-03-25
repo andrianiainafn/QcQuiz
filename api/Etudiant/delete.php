@@ -1,5 +1,4 @@
 <?php
-
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
@@ -9,10 +8,9 @@ $connect = new ConnectToDb();
 $pdo = $connect->connect();
 
 try{
-    $test=['1435HF','1432','1432','1432','1432','1432','1432'];
-    $path = explode('/',$_SERVER['REQUEST_URI']);
-    if(isset($path[3]) &&  is_numeric($path[3])){
-        $query = "DELETE FROM etudiant WHERE etudiant_id = :etudiant_id";
+    $path= explode('/',$_SERVER["REQUEST_URI"]);
+    if(isset($path[3]) ){
+        $query = "DELETE FROM etudiant WHERE num_etudiant = :etudiant_id";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':etudiant_id',$path[3]);
         if($stmt->execute()){

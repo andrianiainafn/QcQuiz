@@ -5,10 +5,11 @@ import axios from 'axios'
 export const Context = createContext()
 
 function AuthContext({children}) {
-  const [isConnected,setIsConnected] = useState(false)
+  const [isConnected,setIsConnected] = useState(false) 
   const getIsConnected = async ()=>{
-    const connection = await axios.get('')
+    const connection = await axios.get('http://localhost:8080/Auth/verifySession.php')
        if(connection.status === 200){
+        console.log(connection.data)
           setIsConnected(connection.data)
        }
     }

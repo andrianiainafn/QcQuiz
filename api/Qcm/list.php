@@ -6,8 +6,6 @@ header('Access-Control-Allow-Credentials: true');
 require('../ConnectToDb.php');
 
 try{
-    
-   
  $gradeChoice= isset($_GET['niveau']);
  $connect = new ConnectToDb();
  $pdo = $connect->connect();

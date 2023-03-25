@@ -1,7 +1,9 @@
-import * as React from 'react';
+import React,{useEffect,useContext} from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import StudentActions from '../../elements/StudentActions';
+import DataContext from '../../../context/AdminContext';
 
 const columns = [
   { field: 'id', headerName: 'Matricule', width: 90 },
@@ -34,30 +36,26 @@ const columns = [
     field: 'action',
     headerName: 'Action',
     type: 'actions',
-    width:150,
+    width:150,  
     renderCell:( params) =>(
       <StudentActions  params={params}/>
     )
   }
 ];
 
-let rows = [
-  { id: '1234', nom: 'Snow', prenom: 'Jon', niveau: "L2",email:"test@gmail.com" },
-  { id: '1431', nom: 'Lannister', prenom: 'Cersei', niveau: "M1",email:"Cersei@gmail.com"  },
-  { id: '1332', nom: 'Lannister', prenom: 'Jaime', niveau: "L3",email:"Jaime@gmail.com" },
-  { id: '1435H-F', nom: 'Stark', prenom: 'Arya', niveau: "M2" ,email:"Jaime@gmail.com"},
-  { id: '1432', nom: 'Targaryen', prenom: 'Daenerys', niveau: "L1" ,email:"Jaime@gmail.com"},
-  { id: '1223', nom: 'Melisandre', prenom: "Dert", niveau: "L2" ,email:"Jaime@gmail.com"},
-  { id: '1422', nom: 'Clifford', prenom: 'Ferrara', niveau: "M1" ,email:"Jaime@gmail.com"},
-  { id: '1222', nom: 'Frances', prenom: 'Rossini', niveau: "M2" ,email:"Jaime@gmail.com"},
-  { id: '1212', nom: 'Roxie', prenom: 'Harvey', niveau: "L3" ,email:"Jaime@gmail.com"},
-];
-
 export default function ListOfStudents() {
-  React.useEffect(()=>{
-    console.log(rows)
-  },[rows])
+  const {arrayOfStudents} = useContext(DataContext)
+  let rows = arrayOfStudents.map(students=>{
+    return(
+      { id: students.num_etudiant, nom: students.nom, prenom: students.nom, niveau: students.niveau,email:students.adr_email }
+    )
+  })
+  
+  useEffect(()=>{
+    console.log(arrayOfStudents,343000)
+  },[arrayOfStudents])
   return (
+    <div className='flex flex-col space-y-5'>
     <Box sx={{ height: 450, width: '98%' }}>
       <DataGrid
         rows={rows}
@@ -65,15 +63,21 @@ export default function ListOfStudents() {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 6,
+              pageSize: 5,
             },
           },
         }}
-        pageSizeOptions={[6]}
+        pageSizeOptions={[5]}
         checkboxSelection
         disableRowSelectionOnClick
       />
     </Box>
+    <div>
+      <button className="px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
+         <Link to="/admin/dashboard/student/create">Add Student</Link>
+      </button>
+    </div>
+    </div>
   );
 }
 

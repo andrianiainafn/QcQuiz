@@ -24,8 +24,8 @@ try{
     $stmt = $pdo->prepare($req);
     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
     $stmt->bindParam(':limit', $nbrPage, PDO::PARAM_INT);
-    $req->execute();
-    $result_1 = $req->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $result_1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
  //LIST
  $gradeChoice= isset($_GET['niveau']);

@@ -4,6 +4,7 @@ import SideBarAdmin from '../../features/Admin/components/elements/SideBarAdmin'
 import Topbar from '../../features/Admin/components/elements/Topbar'
 import { AdminContext } from '../../features/Admin/context/AdminContext'
 
+
 function DashboardLayout() {
   return (
     <div>
@@ -18,7 +19,7 @@ function DashboardLayout() {
                   </div>
                   <div className="">
                     <AdminContext>
-                      <Outlet/>
+                        <Outlet/>
                     </AdminContext>
                   </div>
                 </div>

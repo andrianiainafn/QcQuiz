@@ -13,20 +13,29 @@ require('../ConnectToDb.php');
     }else{
         $currentPage = 1;
     }
-    $query = "SELECT COUNT(*) as total FROM etudiant";
-    $countResult = $pdo->query($query)->fetch(PDO::FETCH_OBJ);
+    //Pagination
+    $queryPaginate = "SELECT COUNT(*) as total FROM etudiant";
+    $countResult = $pdo->query($queryPaginate)->fetch(PDO::FETCH_OBJ);
     $totalResults = $countResult->total;
     $resultsPerPage = 10;
     $totalPages = ceil($totalResults/$resultsPerPage);
     $offset = 1;//$currentPage + 9
     $studentsQuery = "SELECT * FROM etudiant LIMIT :offset,:limit";
-    $stmt = $pdo->prepare($studentsQuery);
-    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-    $stmt->bindParam(':limit', $resultsPerPage, PDO::PARAM_INT);
+    $stmt1 = $pdo->prepare($studentsQuery);
+    $stmt1->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $stmt1->bindParam(':limit', $resultsPerPage, PDO::PARAM_INT);
+    if($stmt1->execute()){
+        $result = $stmt1->fetchAll(PDO::FETCH_OBJ);
+        // echo json_encode($result);
+    }
+    //WITHOUT PAGINATION
+    $query = "SELECT * FROM etudiant";
+    $stmt = $pdo->prepare($query);
     if($stmt->execute()){
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         echo json_encode($result);
     }
+
 }catch(\Exception $e){
     echo "Error" . $e->getMessage();
 }

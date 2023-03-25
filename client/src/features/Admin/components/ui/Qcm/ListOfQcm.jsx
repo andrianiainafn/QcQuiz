@@ -1,68 +1,93 @@
-import * as React from 'react';
+import React,{ useContext ,useEffect} from 'react';
+import {Link} from 'react-router-dom'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import  DataContext  from '../../../context/AdminContext';
+import QcmAction from '../../elements/QcmAction';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
+    field: 'question',
+    headerName: 'Question',
     width: 150,
     editable: true,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
+    field: 'reponse1',
+    headerName: 'Response 1',
     width: 150,
     editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
+    field: 'reponse2',
+    headerName: 'Response 2',
+    width: 150,
     editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    field: 'reponse3',
+    headerName: 'Response 3',
+    width: 150,
+    editable: true,
   },
-];
-
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  {
+    field: 'reponse4',
+    headerName: 'Response 4',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'reponse_vrai',
+    headerName: 'True Response',
+    width: 80,
+    editable: true,
+  },
+  {
+    field: 'action',
+    headerName: 'Action',
+    type: 'actions',
+    width:150,  
+    renderCell:( params) =>(
+      <QcmAction  params={params}/>
+    )
+  }
 ];
 
 export default function ListOfQcm() {
+  const {arrayOfQcm} = useContext(DataContext)
+  let rows = arrayOfQcm.map(qcm=>{
+    return(
+      { id: qcm.num_quest , question: qcm.question, reponse1: qcm.reponse1, reponse2: qcm.reponse2, reponse3: qcm.reponse3, 
+         reponse4: qcm.reponse4, reponse_vrai: qcm.reponse_vrai ,niveau: qcm.niveau }
+    )
+  })
+  useEffect(()=>{
+    console.log(arrayOfQcm,343000)
+  },[arrayOfQcm])
   return (
-    <Box sx={{ height: 450, width: '98%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
+    <div className="flex flex-col space-y-3">
+      <Box sx={{ height: 450, width: '98%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+           pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box>
+          }}
+          pageSizeOptions={[5]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </Box>
+      <div className="">
+       <button className="px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
+         <Link to="/admin/dashboard/qcm/create">Add Qcm</Link>
+        </button>
+      </div>
+    </div>
   );
 }
