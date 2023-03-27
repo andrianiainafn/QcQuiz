@@ -5,11 +5,12 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import {InputLabel} from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DataContext from '../../../context/AdminContext';
 
 function EditQcm() {
   const {getArrayOfQcm} = useContext(DataContext)
+  const navigate = useNavigate()
   const {id} = useParams()
   const [lastData,setLastData] = useState()
   const getLastData = async()=>{
@@ -56,7 +57,10 @@ function EditQcm() {
   const HandleChangeTrueResponse = (e)=>{
     setReponseVrai(e.target.value)
   }
-  const HanClickAddStudents = async()=>{
+  const HanClickCancelEdit = ()=>{
+      navigate('/admin/dashboard/qcm/list')
+  }
+  const HanClickAddQcm = async()=>{
       const information ={
         question,
         reponse1,
@@ -67,7 +71,7 @@ function EditQcm() {
         reponse_vrai,
         num_quest: parseInt(id)
       }
-      const qcm = await axios.post('http://localhost:8080/Qcm/edit.php',information)
+      const qcm = await axios.post('http://localhost:8080/api/Qcm/edit.php',information)
       console.log(qcm)
       if(qcm.status === 200){
         getArrayOfQcm()
@@ -133,10 +137,12 @@ function EditQcm() {
           </FormControl>
           </div>
           <div className='w-full flex justify-between items-center'>  
-            <button onClick={HanClickAddStudents} className="hover:animate-pulse px-8 py-2 bg-transparent border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
+            <button onClick={HanClickAddQcm} className="hover:animate-pulse px-8 py-2
+             border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
                Edit
             </button>
-            <button onClick={HanClickAddStudents} className="hover:animate-pulse px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
+            <button onClick={HanClickCancelEdit} className="hover:animate-pulse px-3 py-2 bg-transparent
+             border border-[#66ACFF] rounded-lg text-[#66ACFF]">
                 Cancel
             </button>
           </div>

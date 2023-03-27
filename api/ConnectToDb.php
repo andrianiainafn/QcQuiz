@@ -14,5 +14,4 @@ class ConnectToDb{
               echo "Connection Error: " . $e->getMessage();  
         }
     }
-
 }

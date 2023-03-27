@@ -88,7 +88,7 @@ function AddStudents() {
           </FormControl>
           </div> 
           <div className='w-full flex justify-between items-center'>  
-            <button onClick={HanClickAddStudents} className="hover:animate-pulse px-3 py-2 bg-transparent border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
+            <button onClick={HanClickAddStudents} className="hover:animate-pulse px-3 py-2  border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
               Add student
             </button>
             <button onClick={HandleClickCancel} className="hover:animate-pulse px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">

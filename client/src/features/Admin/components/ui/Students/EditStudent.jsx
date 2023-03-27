@@ -14,7 +14,7 @@ function EditStudent() {
   const navigate = useNavigate()
   const [lastData,setLastData] = useState()
   const getLastData = async()=>{
-    const data = await axios.get(`http://localhost:8080/Etudiant/getEdit.php/${id}`)
+    const data = await axios.get(`http://localhost:8080/api/Etudiant/getEdit.php/${id}`)
     setLastData(data.data)
   }
   useEffect(()=>{
