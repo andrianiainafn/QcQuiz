@@ -37,8 +37,10 @@ try{
     $result = $stmt->fetchAll(PDO::FETCH_OBJ);
  
     //affichage(jereo kely fatsy aiko le miaafiche resultat anakiro ato de sady tsy nataoko anaty condition)
-    echo json_encode($result);
-    echo json_encode($result_1);
+    $resultTAb = [
+        $result,$result_1
+    ];
+    echo json_encode($resultTAb);
 
     
 }catch(\Exception $e){
