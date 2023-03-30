@@ -8,14 +8,12 @@ const BarChart=() => {
     <ResponsiveBar
         data={data}
         keys={[
-            'hot dog',
-            'burger',
-            'sandwich',
-            'kebab',
-            'fries',
-            'donut'
+            'T.bien',
+            'Bien',
+            'A.bien',
+            'Passable',
         ]}
-        indexBy="country"
+        indexBy="niveau"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
@@ -44,13 +42,13 @@ const BarChart=() => {
         fill={[
             {
                 match: {
-                    id: 'fries'
+                    id: 'T.bien'
                 },
                 id: 'dots'
             },
             {
                 match: {
-                    id: 'sandwich'
+                    id: 'A.bien'
                 },
                 id: 'lines'
             }
@@ -78,7 +76,7 @@ const BarChart=() => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Note',
+            legend: 'Effectif',
             legendPosition: 'middle',
             legendOffset: -40
         }}

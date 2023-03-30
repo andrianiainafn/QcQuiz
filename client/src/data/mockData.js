@@ -319,306 +319,196 @@ export const mockTransactions = [
 
 export const mockBarData = [
   {
-    "country": "AD",
-    "hot dog": 31,
-    "hot dogColor": "hsl(224, 70%, 50%)",
-    "burger": 25,
-    "burgerColor": "hsl(62, 70%, 50%)",
-    "sandwich": 195,
-    "sandwichColor": "hsl(177, 70%, 50%)",
-    "kebab": 87,
-    "kebabColor": "hsl(264, 70%, 50%)",
-    "fries": 66,
-    "friesColor": "hsl(65, 70%, 50%)",
-    "donut": 44,
-    "donutColor": "hsl(191, 70%, 50%)"
+    "niveau": "L1",
+    "T.bien": 31,
+    "T.bienColor": "hsl(224, 70%, 50%)",
+    "Bien": 25,
+    "BienColor": "hsl(62, 70%, 50%)",
+    "A.bien": 195,
+    "A.bienColor": "hsl(177, 70%, 50%)",
+    "Passable": 87,
+    "PassableColor": "hsl(264, 70%, 50%)"
   },
   {
-    "country": "AE",
-    "hot dog": 158,
-    "hot dogColor": "hsl(92, 70%, 50%)",
-    "burger": 72,
-    "burgerColor": "hsl(124, 70%, 50%)",
-    "sandwich": 46,
-    "sandwichColor": "hsl(15, 70%, 50%)",
-    "kebab": 85,
-    "kebabColor": "hsl(319, 70%, 50%)",
-    "fries": 188,
-    "friesColor": "hsl(151, 70%, 50%)",
-    "donut": 111,
-    "donutColor": "hsl(13, 70%, 50%)"
+    "niveau": "L2",
+    "T.bien": 313,
+    "T.bienColor": "hsl(224, 70%, 50%)",
+    "Bien": 21,
+    "BienColor": "hsl(62, 70%, 50%)",
+    "A.bien": 15,
+    "A.bienColor": "hsl(177, 70%, 50%)",
+    "Passable": 107,
+    "PassableColor": "hsl(264, 70%, 50%)"
   },
   {
-    "country": "AF",
-    "hot dog": 160,
-    "hot dogColor": "hsl(255, 70%, 50%)",
-    "burger": 136,
-    "burgerColor": "hsl(154, 70%, 50%)",
-    "sandwich": 170,
-    "sandwichColor": "hsl(53, 70%, 50%)",
-    "kebab": 74,
-    "kebabColor": "hsl(44, 70%, 50%)",
-    "fries": 186,
-    "friesColor": "hsl(327, 70%, 50%)",
-    "donut": 52,
-    "donutColor": "hsl(320, 70%, 50%)"
+    "niveau": "L3",
+    "T.bien": 10,
+    "T.bienColor": "hsl(224, 70%, 50%)",
+    "Bien": 28,
+    "BienColor": "hsl(62, 70%, 50%)",
+    "A.bien": 15,
+    "A.bienColor": "hsl(177, 70%, 50%)",
+    "Passable": 17,
+    "PassableColor": "hsl(264, 70%, 50%)"
   },
   {
-    "country": "AG",
-    "hot dog": 99,
-    "hot dogColor": "hsl(292, 70%, 50%)",
-    "burger": 168,
-    "burgerColor": "hsl(260, 70%, 50%)",
-    "sandwich": 184,
-    "sandwichColor": "hsl(318, 70%, 50%)",
-    "kebab": 23,
-    "kebabColor": "hsl(141, 70%, 50%)",
-    "fries": 105,
-    "friesColor": "hsl(167, 70%, 50%)",
-    "donut": 120,
-    "donutColor": "hsl(229, 70%, 50%)"
+    "niveau": "M1",
+    "T.bien": 4,
+    "T.bienColor": "hsl(224, 70%, 50%)",
+    "Bien": 59,
+    "BienColor": "hsl(62, 70%, 50%)",
+    "A.bien": 10,
+    "A.bienColor": "hsl(177, 70%, 50%)",
+    "Passable": 106,
+    "PassableColor": "hsl(264, 70%, 50%)"
   },
   {
-    "country": "AI",
-    "hot dog": 164,
-    "hot dogColor": "hsl(101, 70%, 50%)",
-    "burger": 119,
-    "burgerColor": "hsl(253, 70%, 50%)",
-    "sandwich": 171,
-    "sandwichColor": "hsl(272, 70%, 50%)",
-    "kebab": 3,
-    "kebabColor": "hsl(188, 70%, 50%)",
-    "fries": 1,
-    "friesColor": "hsl(162, 70%, 50%)",
-    "donut": 152,
-    "donutColor": "hsl(161, 70%, 50%)"
-  },
-  {
-    "country": "AL",
-    "hot dog": 62,
-    "hot dogColor": "hsl(222, 70%, 50%)",
-    "burger": 53,
-    "burgerColor": "hsl(299, 70%, 50%)",
-    "sandwich": 58,
-    "sandwichColor": "hsl(208, 70%, 50%)",
-    "kebab": 32,
-    "kebabColor": "hsl(29, 70%, 50%)",
-    "fries": 9,
-    "friesColor": "hsl(201, 70%, 50%)",
-    "donut": 42,
-    "donutColor": "hsl(23, 70%, 50%)"
-  },
-  {
-    "country": "AM",
-    "hot dog": 141,
-    "hot dogColor": "hsl(317, 70%, 50%)",
-    "burger": 177,
-    "burgerColor": "hsl(345, 70%, 50%)",
-    "sandwich": 79,
-    "sandwichColor": "hsl(340, 70%, 50%)",
-    "kebab": 77,
-    "kebabColor": "hsl(335, 70%, 50%)",
-    "fries": 87,
-    "friesColor": "hsl(87, 70%, 50%)",
-    "donut": 148,
-    "donutColor": "hsl(32, 70%, 50%)"
+    "niveau": "M2",
+    "T.bien": 12,
+    "T.bienColor": "hsl(224, 70%, 50%)",
+    "Bien": 42,
+    "BienColor": "hsl(62, 70%, 50%)",
+    "A.bien": 106,
+    "A.bienColor": "hsl(177, 70%, 50%)",
+    "Passable": 5,
+    "PassableColor": "hsl(264, 70%, 50%)"
   }
 ];
 
 export const mockPieData = [
   {
-    id: "hack",
-    label: "hack",
+    id: "L1",
+    label: "L1",
     value: 239,
     color: "hsl(104, 70%, 50%)",
   },
   {
-    id: "make",
-    label: "make",
+    id: "L2",
+    label: "L2",
     value: 170,
     color: "hsl(162, 70%, 50%)",
   },
   {
-    id: "go",
-    label: "go",
-    value: 322,
-    color: "hsl(291, 70%, 50%)",
-  },
-  {
-    id: "lisp",
-    label: "lisp",
-    value: 503,
-    color: "hsl(229, 70%, 50%)",
-  },
-  {
-    id: "scala",
-    label: "scala",
-    value: 584,
-    color: "hsl(344, 70%, 50%)",
-  },
+    id: "L3",
+    label: "L3",
+    value: 163,
+    color: "hsl(162, 70%, 50%)",
+  },{
+    id: "M1",
+    label: "M1",
+    value: 170,
+    color: "hsl(162, 70%, 50%)",
+  },{
+    id: "M2",
+    label: "M2",
+    value: 50,
+    color: "hsl(162, 70%, 50%)",
+  }
 ];
 
 export const mockLineData = [
   {
-    id: "japan",
+    id: "T.bien",
     color:"#444",
     data: [
       {
-        x: "plane",
+        x: "L1",
         y: 101,
       },
       {
-        x: "helicopter",
+        x: "L2",
         y: 75,
       },
       {
-        x: "boat",
+        x: "L3",
         y: 36,
       },
       {
-        x: "train",
+        x: "M1",
         y: 216,
       },
       {
-        x: "subway",
+        x: "M2",
         y: 35,
-      },
-      {
-        x: "bus",
-        y: 236,
-      },
-      {
-        x: "car",
-        y: 88,
-      },
-      {
-        x: "moto",
-        y: 232,
-      },
-      {
-        x: "bicycle",
-        y: 281,
-      },
-      {
-        x: "horse",
-        y: 1,
-      },
-      {
-        x: "skateboard",
-        y: 35,
-      },
-      {
-        x: "others",
-        y: 14,
       },
     ],
   },
   {
-    id: "france",
+    id: "Bien",
     color: "#444",
     data: [
       {
-        x: "plane",
+        x: "L1",
         y: 212,
       },
       {
-        x: "helicopter",
+        x: "L2",
         y: 190,
       },
       {
-        x: "boat",
+        x: "L3",
         y: 270,
       },
       {
-        x: "train",
+        x: "M1",
         y: 9,
       },
       {
-        x: "subway",
+        x: "M2",
         y: 75,
-      },
-      {
-        x: "bus",
-        y: 175,
-      },
-      {
-        x: "car",
-        y: 33,
-      },
-      {
-        x: "moto",
-        y: 189,
-      },
-      {
-        x: "bicycle",
-        y: 97,
-      },
-      {
-        x: "horse",
-        y: 87,
-      },
-      {
-        x: "skateboard",
-        y: 299,
-      },
-      {
-        x: "others",
-        y: 251,
-      },
+      }
     ],
   },
   {
-    id: "us",
+    id: "A.bien",
     color: "#444",
     data: [
       {
-        x: "plane",
+        x: "L1",
         y: 191,
       },
       {
-        x: "helicopter",
+        x: "L2",
         y: 136,
       },
       {
-        x: "boat",
+        x: "L3",
         y: 91,
       },
       {
-        x: "train",
+        x: "M1",
         y: 190,
       },
       {
-        x: "subway",
+        x: "M2",
         y: 211,
+      }
+    ],
+  },
+  {
+    id: "Passable",
+    color: "#444",
+    data: [
+      {
+        x: "L1",
+        y: 20,
       },
       {
-        x: "bus",
-        y: 152,
+        x: "L2",
+        y: 138,
       },
       {
-        x: "car",
-        y: 189,
+        x: "L3",
+        y: 80,
       },
       {
-        x: "moto",
-        y: 152,
+        x: "M1",
+        y: 10,
       },
       {
-        x: "bicycle",
-        y: 8,
-      },
-      {
-        x: "horse",
-        y: 197,
-      },
-      {
-        x: "skateboard",
-        y: 107,
-      },
-      {
-        x: "others",
-        y: 170,
-      },
+        x: "M2",
+        y: 111,
+      }
     ],
   },
 ];

@@ -6,18 +6,24 @@ export const Context = createContext()
 
 function AuthContext({children}) {
   const [isConnected,setIsConnected] = useState(false) 
+  const [studentMatricule,setStudentMatricule] = useState()
+  const [studentNiveau,setStudentNiveau] = useState()
   const getIsConnected = async ()=>{
-    const connection = await axios.get('http://localhost:8080/api/Auth/verifySession.php')
+    const connection = await axios.get('http://localhost:8080/Auth/verifySession.php',{withCredentials:true})
+    console.log(connection.data)
        if(connection.status === 200){
-        console.log(connection.data)
-          setIsConnected(connection.data)
+          setIsConnected(connection.data.isconnected)
+          console.log(connection.data.isconnected,9000)
+          setStudentMatricule(connection.data.matricule)
+          console.log(connection.data.matricule,8000)
+          setStudentNiveau(connection.data.niveau)
        }
     }
     useEffect(()=>{
       getIsConnected()
     },[])
   return (
-    <Context.Provider value={{isConnected}}>
+    <Context.Provider value={{isConnected,studentMatricule,studentNiveau,getIsConnected}}>
         {children}
     </Context.Provider>
   )

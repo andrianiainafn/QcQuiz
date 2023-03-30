@@ -58,49 +58,31 @@ function PieChart() {
     fill={[
         {
             match: {
-                id: 'ruby'
+                id: 'L1'
             },
             id: 'dots'
         },
         {
             match: {
-                id: 'c'
+                id: 'L2'
             },
             id: 'dots'
         },
         {
             match: {
-                id: 'go'
+                id: 'L3'
             },
             id: 'dots'
         },
         {
             match: {
-                id: 'python'
+                id: 'M1'
             },
             id: 'dots'
         },
         {
             match: {
-                id: 'scala'
-            },
-            id: 'lines'
-        },
-        {
-            match: {
-                id: 'lisp'
-            },
-            id: 'lines'
-        },
-        {
-            match: {
-                id: 'elixir'
-            },
-            id: 'lines'
-        },
-        {
-            match: {
-                id: 'javascript'
+                id: 'M2'
             },
             id: 'lines'
         }

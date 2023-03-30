@@ -1,10 +1,12 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Listes from '../features/Admin/components/ui/Notes/Listes'
 import AddQcm from '../features/Admin/components/ui/Qcm/AddQcm'
 import EditQcm from '../features/Admin/components/ui/Qcm/EditQcm'
 import ListOfQcm from '../features/Admin/components/ui/Qcm/ListOfQcm'
 import AddStudents from '../features/Admin/components/ui/Students/AddStudents'
 import Bar from '../features/Admin/components/ui/Students/Bar'
+import ByLevel from '../features/Admin/components/ui/Students/ByLevel'
 import EditStudent from '../features/Admin/components/ui/Students/EditStudent'
 import History from '../features/Admin/components/ui/Students/History'
 import Line from '../features/Admin/components/ui/Students/Line'
@@ -18,6 +20,8 @@ function AdminLayout() {
         <Route path='/dashboard' element={<DashboardLayout/>}>
             <Route path='' index={true} element={<History/>}/>
             <Route path='student/list' element={<ListOfStudents/>}/>
+            <Route path='student/notes' element={<Listes/>}/>
+            <Route path='student/byLevel' element={<ByLevel/>}/>
             <Route path='student/create' element={<AddStudents/>}/>
             <Route path='student/:id/edit' element={<EditStudent/>}/>
             <Route path='qcm/list' element={<ListOfQcm/>}/>

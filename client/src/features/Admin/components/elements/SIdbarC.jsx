@@ -35,6 +35,11 @@ function SIdbarC() {
       icon: <PersonOutlinedIcon sx={{color: "#66ACFF"}}/>,
     },
     {
+      link: '/admin/dashboard/student/notes',
+      title: 'Lists Notes',
+      icon: <ContactsOutlinedIcon sx={{color: "#66ACFF"}}/>,      
+    },
+    {
       link: '/admin/dashboard/faq',
       title: 'FAQ Page',
       icon: <HelpOutlineOutlinedIcon sx={{color: "#66ACFF"}}/>,
@@ -51,10 +56,6 @@ function SIdbarC() {
       link: '/admin/dashboard/line',
       title: 'Line Chart',
       icon: <TimelineOutlinedIcon sx={{color: "#66ACFF"}}/>,
-    },{
-      link: '/admin/dashboard/contact',
-      title: 'Contacts',
-      icon: <ContactsOutlinedIcon sx={{color: "#66ACFF"}}/>,      
     }
   ]
   return (

@@ -6,7 +6,7 @@ import StudentActions from '../../elements/StudentActions';
 import DataContext from '../../../context/AdminContext';
 
 const columns = [
-  { field: 'id', headerName: 'Matricule', width: 90 },
+  { field: 'id', headerName: 'Matricule', width: 80 },
   
   {
     field: 'nom',
@@ -47,7 +47,7 @@ export default function ListOfStudents() {
   const {arrayOfStudents} = useContext(DataContext)
   let rows = arrayOfStudents.map(students=>{
     return(
-      { id: students.num_etudiant, nom: students.nom, prenom: students.nom, niveau: students.niveau,email:students.adr_email }
+      { id: students.num_etudiant, nom: students.nom, prenom: students.prenom, niveau: students.niveau,email:students.adr_email }
     )
   })
   
@@ -72,9 +72,12 @@ export default function ListOfStudents() {
         disableRowSelectionOnClick
       />
     </Box>
-    <div>
+    <div className="flex justify-between items-center mr-5">
       <button className="px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
          <Link to="/admin/dashboard/student/create">Add Student</Link>
+      </button>
+      <button className="px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
+         <Link to="/admin/dashboard/student/byLevel">Students List By Level</Link>
       </button>
     </div>
     </div>

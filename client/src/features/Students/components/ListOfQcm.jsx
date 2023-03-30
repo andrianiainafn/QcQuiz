@@ -1,8 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
+import Header from '../element/Header';
+import ListContext from '../StudentContext';
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
+  const  {exam} = useContext(ListContext)
+  const [note,setNote] = useState(0)
   const [response,setResponse] = useState({
     question1: null,
     question2: null,
@@ -12,7 +16,7 @@ function ListOfQcm() {
     question6: null,
     question7: null,
     question8: null,
-    question8: null,
+    question9: null,
     question10: null,
   })
   const nonActiveClass = "text-[#38c172] w-[20%] p-2 cursor-pointer border border-[#38c172] flex justify-center items-center rounded-3xl"
@@ -27,9 +31,8 @@ function ListOfQcm() {
         e.target.classList.remove('text-[#38c172]')
         e.target.classList.add('text-white')
         e.target.classList.add('bg-[#38c172]')
-        console.log(e.target.classList)
-        console.log(e.target.getAttribute('id').split(''))
-        const responsArray = e.target.getAttribute('id').split('')
+        const responsString = e.target.getAttribute('id')
+        const responsArray = responsString.split(',')
         switch(responsArray[1]){
             case '1':
               setResponse({...response,question1:responsArray[0]})
@@ -67,7 +70,7 @@ function ListOfQcm() {
       }
     }
 }
-  let spies = []
+  const [spies,setSpies] = useState([])
   const ref = useRef(null)
   const [valueOfScroll,setValueOfScroll] = useState(true)
   const ratio = .6
@@ -107,7 +110,7 @@ function ListOfQcm() {
   }
   useEffect(()=>{
     if(ref.current){
-      spies = Array.from(ref.current.querySelectorAll('[data-spy]'))
+      setSpies(Array.from(ref.current.querySelectorAll('[data-spy]')))
     }
     if(spies.length > 0){
       observe(spies)
@@ -117,7 +120,18 @@ function ListOfQcm() {
     }
   },[valueOfScroll])
   const HandleClikSubmit = ()=>{
-    console.log(response)
+    console.log(response,909090)
+    console.log(exam,7070)
+    for(let i=0;i<10;i++){ 
+      const res = 'question' + parseInt(i + 1)
+      console.log(response[res],i)
+      console.log(exam[i].reponse_vrai,i)
+      if(response.res === exam[i].response_vrai){
+          setNote(note=>note+1)
+          console.log(note)
+      }
+
+    }
   }
   return (
     <div className='relative h-screen bg-[#001E3C] scroll-smooth overflow-y-scroll snap-y snap-mandatory' 
@@ -131,40 +145,50 @@ function ListOfQcm() {
               ))
             }
       </div>
+      <div className='h-screen snap-start' data-spy>
+        <Header/>
+      </div>  
      {
-      numQcm.map(elem=>(
-        <div key={elem} id={elem} className="flex snap-center  flex-col h-screen items-center justify-center bg-[#001E3C] " data-spy>
-        <div className="text-start text-2xl text-[#f2f2f2]">
-            <h1>{elem}<ArrowRightAltOutlinedIcon/> Que signifie l' acronyme PHP ? </h1>
+      exam.map((elem,key)=>(
+        <div key={key} id={key+1} className="flex snap-center w-[80%] mx-auto   flex-col h-screen items-center justify-center bg-[#001E3C] " data-spy>
+        <div className=" text-2xl text-[#f2f2f2] text-start">
+            <h1>{key + 1}<ArrowRightAltOutlinedIcon/> {elem.question} </h1>
         </div>
         <div className="mt-5 text-xl flex flex-col space-y-2 text-[#f2f2f2]">
           <div className="">
-            A- Hypertext Preprocessor
+            A- {elem.reponse1}
           </div>
           <div className="">
-            B- Hypertext Preprocessor
+            B- {elem.reponse2}
           </div>
           <div className="">
-            C- Hypertext Preprocessor
+            C- {elem.reponse3}
           </div>
           <div className="">
-            D- Hypertext Preprocessor
+            D- {elem.reponse4}
           </div>
         </div>
         <div className=" mt-12 w-[40%] flex mx-auto justify-between items-center ">
-          <div onClick={Handleclick} className={nonActiveClass} id={"A" + elem }> 
-                A
+          <div onClick={Handleclick} className={nonActiveClass} id={"reponse1," +  (key +1) }> 
+            A
           </div>
-          <div onClick={Handleclick} className={nonActiveClass} id={"B" + elem }>
-              B
+          <div onClick={Handleclick} className={nonActiveClass} id={"reponse2," + (key +1) }>
+            B
           </div>
-          <div  onClick={Handleclick} className={nonActiveClass} id={"C" + elem }>
-              C
+          <div  onClick={Handleclick} className={nonActiveClass} id={"reponse3," + (key +1) }>
+            C
           </div>
-          <div  onClick={Handleclick} className={nonActiveClass} id={"D" + elem }>
-              D
+          <div  onClick={Handleclick} className={nonActiveClass} id={"reponse4," + (key +1) }>
+            D
           </div>
         </div>
+        {
+          key + 1 === 10 && (
+          <div  onClick={HandleClikSubmit} className='hover:text-[#f2f2f2] hover:bg-[#38c172] mt-10 text-[#38c172] w-[20%] p-2 cursor-pointer border border-[#38c172] flex justify-center items-center rounded-3xl' >
+            Submit Response
+         </div>
+          )
+        }
       </div>
       ))
      }

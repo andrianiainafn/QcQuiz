@@ -6,7 +6,7 @@ import  DataContext  from '../../../context/AdminContext';
 import QcmAction from '../../elements/QcmAction';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID', width: 40 },
   {
     field: 'question',
     headerName: 'Question',
@@ -56,15 +56,15 @@ const columns = [
 
 export default function ListOfQcm() {
   const {arrayOfQcm} = useContext(DataContext)
+  useEffect(()=>{
+    console.log(arrayOfQcm,343000)
+  },[arrayOfQcm])
   let rows = arrayOfQcm.map(qcm=>{
     return(
       { id: qcm.num_quest , question: qcm.question, reponse1: qcm.reponse1, reponse2: qcm.reponse2, reponse3: qcm.reponse3, 
          reponse4: qcm.reponse4, reponse_vrai: qcm.reponse_vrai ,niveau: qcm.niveau }
     )
   })
-  useEffect(()=>{
-    console.log(arrayOfQcm,343000)
-  },[arrayOfQcm])
   return (
     <div className="flex flex-col space-y-3">
       <Box sx={{ height: 450, width: '98%' }}>

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {FormControl, InputLabel, MenuItem, Select, TextField} from '@mui/material'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import DataContext from '../../../context/AdminContext'
 
 function AddQcm() {
   const [information,setInformation] = useState({})
+  const {getArrayOfQcm} = useContext(DataContext)
   const navigate = useNavigate()
   const HandleChange = (e)=>{
     const name = e.target.name
@@ -18,9 +20,11 @@ function AddQcm() {
 
     }else{
       const student = await axios.post('http://localhost:8080/Qcm/create.php',information)
-      console.log(student)
       if(student.status === 200){
-        console.log('success')
+        if(student.data.status === 200){
+          getArrayOfQcm()
+          navigate('/admin/dashboard/qcm/list')
+        }
       }else{
         console.log('Failed to create student')
       }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {TextField} from '@mui/material'
 import {styled } from '@mui/material/styles'
 import axios from 'axios'
@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import {InputLabel} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import DataContext from '../../../context/AdminContext';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -29,6 +30,7 @@ const CssTextField = styled(TextField)({
 });
 function AddStudents() {
   const [information,setInformation] = useState({})
+  const {getArrayStudents} = useContext(DataContext)
   const navigate = useNavigate()
   const HandleChange = (e)=>{
     const name = e.target.name
@@ -48,6 +50,7 @@ function AddStudents() {
         console.log(student)
         if(student.status === 200){
           console.log('success')
+          getArrayStudents()
         }else{
           console.log('Failed to create student')
         }

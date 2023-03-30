@@ -7,6 +7,7 @@ import  NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutline
 import  SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import  PersonOutlinedIcon from '@mui/icons-material/PersonOutlined'
 import  SearchIcon from '@mui/icons-material/Search'
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew'
 
 function Topbar() {
   return (
@@ -36,6 +37,9 @@ function Topbar() {
           </IconButton>
           <IconButton>
             <PersonOutlinedIcon sx={{color: "#66ACFF"}}/>
+          </IconButton>
+          <IconButton>
+            <PowerSettingsNewIcon sx={{color: "#66ACFF"}}/>
           </IconButton>
           </Box>
     </Box>

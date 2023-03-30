@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate,Link } from 'react-router-dom';
 import {Checkbox, FormControlLabel, TextField} from '@mui/material'
@@ -9,13 +9,10 @@ import { motion } from 'framer-motion';
 import {styled } from '@mui/material/styles'
 import axios from 'axios';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import Context from '../../../../context/AuthContext';
 
 
 const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: '#332fd0',
-    backGroundColor:'#66ACFF'
-  },
   '& label':{
       color:"#f2f2f2"
   },
@@ -46,11 +43,25 @@ const CssTextField = styled(TextField)({
 });
 function LoginStudents() {
   const navigate = useNavigate()
+  const{getIsConnected} = useContext(Context)
   const HandleClickBack = ()=>{
       navigate('/')
   }
   const handleFormSubmit = async (values)=>{
-      navigate('/students')
+      console.log(values)
+      const login = await axios.post('http://localhost:8080/Auth/loginStudent.php',values,{withCredentials:true})
+      console.log(login.data)
+      if(login.status === 200){
+         if(login.data.status === 200){
+            getIsConnected()
+           navigate(`/students/${values.matricule}`)
+         }
+         else{
+            console.log("Invalid email or matricule")
+         }
+      }else{
+        console.log("Serveur Error")
+      }
   }
   return (
     <div className='md:mt-16 mt-[20vh] text-[#f2f2f2] '>
@@ -165,8 +176,8 @@ function LoginStudents() {
 export default LoginStudents
 
 const checkoutSchema = yup.object().shape({
-  identifiant: yup.string().email("invalid email").required('required'),
-  matricule: yup.string().required("required"),
+  identifiant: yup.string().email("!nvalid email !").required('Required !'),
+  matricule: yup.string().required("Required !"),
   rememberMe: yup.boolean()
 });
 const initialValues = {

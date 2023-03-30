@@ -34,6 +34,9 @@ function EditQcm() {
       setReponse2(lastData.reponse2)
       setReponse3(lastData.reponse3)
       setReponse4(lastData.reponse4)
+      setNiveau(lastData.niveau)
+      setReponseVrai(lastData.reponse_vrai)
+      console.log(niveau)
     }
   },[lastData])
   const HandleChangeNiveau = (e)=>{
@@ -71,10 +74,11 @@ function EditQcm() {
         reponse_vrai,
         num_quest: parseInt(id)
       }
-      const qcm = await axios.post('http://localhost:8080/api/Qcm/edit.php',information)
+      const qcm = await axios.post('http://localhost:8080/Qcm/edit.php',information)
       console.log(qcm)
       if(qcm.status === 200){
         getArrayOfQcm()
+        navigate('/admin/dashboard/qcm/list')
         console.log('success')
       }else{
         console.log('Failed to create student')
@@ -110,6 +114,7 @@ function EditQcm() {
                   required
                   label="Gender"
                   name="niveau"
+                  defaultValue={niveau}
                   onChange={HandleChangeNiveau}
                 >
                   <MenuItem value={'L1'}>L1</MenuItem>
@@ -127,6 +132,7 @@ function EditQcm() {
                   required
                   label="Gender"
                   name="reponse_vrai"
+                  defaultValue={reponse_vrai}
                   onChange={HandleChangeTrueResponse}
                 >
                   <MenuItem value={'reponse1'}>Respons N.1</MenuItem>

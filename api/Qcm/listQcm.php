@@ -33,10 +33,10 @@ require('../ConnectToDb.php');
     $query = "SELECT * FROM qcm";
     $stmt = $pdo->prepare($query);
     if($stmt->execute()){
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $result = $stmt->fetchAll();
         echo json_encode($result);
     }else{
-        $response=["status"=> 401,"message"=> "Error when creating Qcm"];
+        $response=["status"=> 401,"message"=> "Error when listing Qcm"];
         echo json_encode($response);
     }
 

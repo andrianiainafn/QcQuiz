@@ -12,9 +12,16 @@ function AppRoute() {
     <BrowserRouter>
         <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='students/*' element={<StudentsLayout/>}/>
             <Route path='auth/*' element={<AuthLayout/>}/>
-            <Route path='admin/*' element={<AdminLayout/>}/>
+            {
+              isConnected && ( 
+                <>
+                  <Route path='students/:id' element={<StudentsLayout/>}/>
+                  <Route path='admin/*' element={<AdminLayout/>}/>
+                </>
+              )
+            }
+            <Route path='*' element={<h3>404 NOT FOUND</h3>}/>
         </Routes>
     </BrowserRouter>
   )

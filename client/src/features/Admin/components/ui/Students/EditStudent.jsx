@@ -14,7 +14,7 @@ function EditStudent() {
   const navigate = useNavigate()
   const [lastData,setLastData] = useState()
   const getLastData = async()=>{
-    const data = await axios.get(`http://localhost:8080/api/Etudiant/getEdit.php/${id}`)
+    const data = await axios.get(`http://localhost:8080/Etudiant/getEdit.php/${id}`)
     setLastData(data.data)
   }
   useEffect(()=>{
@@ -56,7 +56,8 @@ function EditStudent() {
       console.log(student)
       if(student.status === 200){
         getArrayOfStudents()
-        console.log('success')
+        navigate('/admin/dashboard/student/list')
+        
       }else{
         console.log('Failed to create student')
       }
@@ -98,7 +99,7 @@ function EditStudent() {
               </FormControl>
               </div> 
               <div className='w-full flex justify-between items-center'>  
-                <button onClick={HanClickAddStudents} className="hover:animate-pulse px-8 py-2 bg-transparent border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
+                <button onClick={HanClickAddStudents} className="hover:animate-pulse px-8 py-2  border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
                    Edit
                 </button>
                 <button onClick={HandleClickCancel} className="hover:animate-pulse px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
