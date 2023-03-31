@@ -15,9 +15,19 @@
         $query = "SELECT * FROM etudiant WHERE  niveau = :niveau";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':niveau',$niveau,PDO::PARAM_STR);
+        $queryNombre = "SELECT COUNT(*) as effectif FROM etudiant WHERE niveau  = :niveau";
+        $stmtNombre = $pdo->prepare($queryNombre);
+        $stmtNombre->bindParam(':niveau',$niveau,PDO::PARAM_STR);
+        if($stmtNombre->execute()){
+            $nombre = $stmtNombre->fetch();
+        }
         if($stmt->execute()){
             $student = $stmt->fetchAll(PDO::FETCH_OBJ);
-            echo json_encode($student);
+            $result = [
+                'lists' => $student,
+                'effectif' => $nombre
+            ];
+            echo json_encode($result);
         }
     }
    }catch(\Exception $e){

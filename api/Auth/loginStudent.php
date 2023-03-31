@@ -1,7 +1,8 @@
 <?php
-session_start();
-// $expire = time() + ( 3600);
+// session_set_cookie_params(0,'api/','.localhost');
+// $expire = time() + (24  * 3600);
 // setcookie(session_name(),session_id(),$expire,'/');
+session_start();
 
 
 header('Access-Control-Allow-Origin: http://localhost:3000');

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import Header from '../element/Header';
 import ListContext from '../StudentContext';
+import axios from 'axios';
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
@@ -119,7 +120,7 @@ function ListOfQcm() {
       })
     }
   },[valueOfScroll])
-  const HandleClikSubmit = ()=>{
+  const HandleClikSubmit = async()=>{
     console.log(response,909090)
     console.log(exam,7070)
     for(let i=0;i<10;i++){ 
@@ -129,6 +130,17 @@ function ListOfQcm() {
       if(response.res === exam[i].response_vrai){
           setNote(note=>note+1)
           console.log(note)
+          const information = {note} 
+          const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
+          if(sendNotes.status === 200 ){
+            if(sendNotes.data.status === 200){
+              console.log('success')
+            }else{
+              console.log('error')
+            }
+          }else{
+            console.log('grave erreur')
+          } 
       }
 
     }
@@ -145,6 +157,9 @@ function ListOfQcm() {
               ))
             }
       </div>
+      <div className=' absolute fixed h-[10vh] w-[10vw] top-[50%] left-[50%] blur rounded-full bg-gradient-to-br from-[#001E3C] to-[#1fa1b8]'/>
+        
+      {/* </div> */}
       <div className='h-screen snap-start' data-spy>
         <Header/>
       </div>  

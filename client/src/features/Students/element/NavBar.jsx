@@ -9,9 +9,13 @@ function NavBar() {
     const HandleClickLogout = async()=>{
         const logout = await axios.get('http://localhost:8080/Auth/logout.php')
         if(logout.status === 200){
-            if(logout.data.status === 200){
+            console.log(logout.data)
+            console.log(document.cookie)
+            document.cookie = 'PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+            console.log(document.cookie)
+            // if(logout.data.status === 200){
                 navigate('/')
-            }
+            // }
         }
     }
   return (

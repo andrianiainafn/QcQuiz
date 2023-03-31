@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate,Link } from 'react-router-dom';
-import {Checkbox, FormControlLabel, TextField} from '@mui/material'
+import {Alert, AlertTitle, Checkbox, FormControlLabel, TextField} from '@mui/material'
 import {Formik} from 'formik'
 import InputAdornment from '@mui/material/InputAdornment';
 import * as yup from "yup";
@@ -18,7 +18,6 @@ const CssTextField = styled(TextField)({
   },
   '& label.Mui-focused':{
     color:"#f2f2f2",
-    backGroundColor:'#66ACFF'
   },
   '& .MuiInput-underline:after': {
     borderBottomColor: '#332fd0',
@@ -28,15 +27,12 @@ const CssTextField = styled(TextField)({
       height: '8vh',
       color:'#66ACFF',
       borderColor:'#eee',
-      backGroundColor:'#66ACFF'
     },
     '&:hover fieldset': {
       borderColor: '#fb2576',
-      backGroundColor:'#66ACFF'
     },
     '&.Mui-focused fieldset': {
       borderColor: '#66ACFF',
-      backGroundColor:'#66ACFF'
     },
     
   },
@@ -44,6 +40,7 @@ const CssTextField = styled(TextField)({
 function LoginStudents() {
   const navigate = useNavigate()
   const{getIsConnected} = useContext(Context)
+  const [error,setError] = useState(false)
   const HandleClickBack = ()=>{
       navigate('/')
   }
@@ -57,7 +54,7 @@ function LoginStudents() {
            navigate(`/students/${values.matricule}`)
          }
          else{
-            console.log("Invalid email or matricule")
+          setError(true)
          }
       }else{
         console.log("Serveur Error")
@@ -69,6 +66,31 @@ function LoginStudents() {
         <div className="text-center text-2xl">
           <h3 className='text-[#38C172]'>LOGIN</h3>
         </div>
+        {
+            error && (
+              <motion.div
+              initial={
+                {
+                 opacity: 0,
+                 y:-100
+                }
+                }
+                animate={{
+                    opacity:1,
+                    y:0
+                }}
+                transition={
+                    {
+                      duration: 0.7
+                    }
+                }>
+                  <Alert severity='error'>
+                    {/* <AlertTitle>Error</AlertTitle> */}
+                    Email Address or Matricule Number Invalid !
+                  </Alert>
+              </motion.div>
+            )
+          }
         <Formik
                     onSubmit={handleFormSubmit}
                     initialValues={initialValues}
@@ -176,7 +198,7 @@ function LoginStudents() {
 export default LoginStudents
 
 const checkoutSchema = yup.object().shape({
-  identifiant: yup.string().email("!nvalid email !").required('Required !'),
+  identifiant: yup.string().email("Please enter an email address valid!").required('Required !'),
   matricule: yup.string().required("Required !"),
   rememberMe: yup.boolean()
 });
