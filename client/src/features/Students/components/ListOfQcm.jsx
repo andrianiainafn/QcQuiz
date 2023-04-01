@@ -3,6 +3,7 @@ import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined
 import Header from '../element/Header';
 import ListContext from '../StudentContext';
 import axios from 'axios';
+import {motion} from 'framer-motion'
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
@@ -151,14 +152,24 @@ function ListOfQcm() {
       <div className="fixed flex flex-col space-y-3  h-[24vh] right-16 mt-[11%]">
             {
               numQcm.map((question,key)=>(
-                <div key={key} className=" text-[#38c172] h-8 w-8 border cursor-pointer border-[#38c172] rounded-full flex justify-center items-center ">
+                <motion.div 
+                initial={{
+                  y:-200,
+                  opacity:0
+                }}
+                transition={{
+                  duration:1.5
+                }}
+                animate={{opacity:1,y:0}}
+                key={key} className=" text-[#38c172] h-8 w-8 border cursor-pointer border-[#38c172] rounded-full flex justify-center items-center ">
                   <a href= {'#' + question} >{question}</a>
-                </div>
+                </motion.div>
               ))
             }
       </div>
-      <div className=' absolute fixed h-[10vh] w-[10vw] top-[50%] left-[50%] blur rounded-full bg-gradient-to-br from-[#001E3C] to-[#1fa1b8]'/>
-        
+      <div className='fixed h-[10vh] w-[5vw] top-[30%] left-[15%] blur rounded-full bg-gradient-to-br from-[#38c172] animate-pulse to-[#1fa1b8]'/>
+      <div className='fixed h-[10vh] w-[5vw] top-[70%] left-[80%] blur rounded-full bg-gradient-to-br from-[#38c172] animate-spin to-[#1fa1b8]'/>
+      <div className='fixed h-[10vh] w-[5vw] top-[80%] left-[5%] blur rounded-full bg-gradient-to-br from-[#38c172] animate-bounce to-[#1fa1b8]'/>
       {/* </div> */}
       <div className='h-screen snap-start' data-spy>
         <Header/>
@@ -166,7 +177,7 @@ function ListOfQcm() {
      {
       exam.map((elem,key)=>(
         <div key={key} id={key+1} className="flex snap-center w-[80%] mx-auto   flex-col h-screen items-center justify-center bg-[#001E3C] " data-spy>
-        <div className=" text-2xl text-[#f2f2f2] text-start">
+        <div className=" text-2xl z-3 text-[#f2f2f2] text-start">
             <h1>{key + 1}<ArrowRightAltOutlinedIcon/> {elem.question} </h1>
         </div>
         <div className="mt-5 text-xl flex flex-col space-y-2 text-[#f2f2f2]">

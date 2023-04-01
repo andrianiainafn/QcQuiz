@@ -99,7 +99,7 @@ export default function ByLevel() {
       </button>
       <h3 className='text-xl'>
         {
-          effectif === 0 ? "There is no Student enregitred with this Level  " : "L' effectif total des etudiants dans cette niveau est de: " + <span> effectif </span>
+          effectif === 0 ? "There is no Student enregitred with this Level  " : "L' effectif total des etudiants dans cette niveau est de: " +  effectif 
         }
       </h3>
     </div>

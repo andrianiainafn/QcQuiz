@@ -131,6 +131,7 @@ function LoginStudents() {
                         helperText={touched.identifiant && errors.identifiant}
                         fullWidth variant='outlined'  label='Email' type='identifiant'
                         InputProps={{
+                          style: {color:'#f2f2f2'},
                           startAdornment:(
                             <InputAdornment position='start'>
                               <PersonOutlinedIcon sx={{color:"#eee"}}/>
@@ -147,6 +148,7 @@ function LoginStudents() {
                         helperText={touched.matricule && errors.matricule}
                         fullWidth variant='outlined'  label='Matricule' type='text'
                         InputProps={{
+                          style: {color:'#f2f2f2'},
                           startAdornment:(
                             <InputAdornment position='start'>
                               <PersonOutlinedIcon sx={{color:"#eee"}}/>
