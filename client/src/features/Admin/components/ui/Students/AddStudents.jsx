@@ -32,7 +32,7 @@ const CssTextField = styled(TextField)({
 });
 function AddStudents() {
   const [information,setInformation] = useState({})
-  const {getArrayStudents} = useContext(DataContext)
+  const {getArrayStudents,getArrayOfNotes} = useContext(DataContext)
   const [error,setError] = useState(false)
   const [success,setSuccess] = useState()
   const [message,setMessage] = useState('Somthing went wrong when adding student')
@@ -56,6 +56,7 @@ function AddStudents() {
         if(student.status === 200){
             if(student.data.status === 200){
               setSuccess(true)
+              getArrayOfNotes()
               getArrayStudents()
             }else{
               setError(true)    

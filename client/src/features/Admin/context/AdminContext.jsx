@@ -6,6 +6,7 @@ function AdminContext({children}) {
     const [arrayOfStudents,setArrayOfStudents] = useState([])
     const [arrayOfQcm,setArrayOfQcm] = useState([])  
     const [arrayOfStudentByLevel,setArrayOfStudentByLevel] = useState([])
+    const [arrayOfNotes,setArrayOfNotes] = useState([])
     const [effectif,setEffectif] = useState(11)
     const getArrayOfStudents = async()=>{
         const getStudents = await axios.get('http://localhost:8080/Etudiant/list.php')
@@ -27,14 +28,21 @@ function AdminContext({children}) {
           setArrayOfQcm(getQcm.data)
         }
       }
+      const getArrayOfNotes = async()=>{
+        const getNotes = await axios.get('http://localhost:8080/Notes/list.php')
+        if(getNotes.status === 200){
+          setArrayOfNotes(getNotes.data)
+        }
+      }
       useEffect(()=>{
+        getArrayOfNotes()
         getArrayOfStudents()
         getArrayOfQcm()
         getStudentByLevel()
     },[])
 
   return (
-    <DataContext.Provider value={{arrayOfStudents,effectif,arrayOfQcm,arrayOfStudentByLevel,getArrayOfStudents,getArrayOfQcm,getStudentByLevel}}>
+    <DataContext.Provider value={{arrayOfStudents,effectif,arrayOfQcm,arrayOfStudentByLevel,arrayOfNotes,getArrayOfNotes,getArrayOfStudents,getArrayOfQcm,getStudentByLevel}}>
       {children}
     </DataContext.Provider>
   )

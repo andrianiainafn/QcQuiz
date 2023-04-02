@@ -4,6 +4,7 @@ import Header from '../element/Header';
 import ListContext from '../StudentContext';
 import axios from 'axios';
 import {motion} from 'framer-motion'
+import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
@@ -121,30 +122,40 @@ function ListOfQcm() {
       })
     }
   },[valueOfScroll])
+  const [open,setOpen] = useState(false)
+  const handleClose = ()=>{
+    setNote(0)
+    setOpen(false)
+  }
+  const handleClickSure = async()=>{
+      console.log(note)
+      setOpen(false)
+      const information = {note} 
+      const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
+      if(sendNotes.status === 200 ){
+        if(sendNotes.data.status === 200){
+          console.log('success')
+          setNote(0)
+        }else{
+          console.log('error')
+        }
+      }else{
+        console.log('grave erreur')
+      }
+  }
   const HandleClikSubmit = async()=>{
-    console.log(response,909090)
-    console.log(exam,7070)
     for(let i=0;i<10;i++){ 
       const res = 'question' + parseInt(i + 1)
-      console.log(response[res],i)
-      console.log(exam[i].reponse_vrai,i)
-      if(response.res === exam[i].response_vrai){
-          setNote(note=>note+1)
+      const resStudent = response[res]
+      const  resVrai = exam[i].reponse_vrai
+      console.log('resStudent:',resStudent,'resVrai:',resVrai)
+      if(resStudent === resVrai){
+        console.log('test',i)
+          setNote(ancien=>ancien+1)
           console.log(note)
-          const information = {note} 
-          const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
-          if(sendNotes.status === 200 ){
-            if(sendNotes.data.status === 200){
-              console.log('success')
-            }else{
-              console.log('error')
-            }
-          }else{
-            console.log('grave erreur')
-          } 
+        }
       }
-
-    }
+      setOpen(true) 
   }
   return (
     <div className='relative h-screen bg-[#001E3C] scroll-smooth overflow-y-scroll snap-y snap-mandatory' 
@@ -218,6 +229,34 @@ function ListOfQcm() {
       </div>
       ))
      }
+     <Dialog
+     open={open}
+     onClose={handleClose}
+     aria-labelledby="alert-dialog-title"
+     aria-describedby='alert-dialog-description'
+     sx={{
+      "& .MuiDialog-paper":{
+        backgroundColor: "#001E3C"
+      },
+      "& .MuiDialogContentText-root":{
+        color:"#eee"
+      }
+     }}
+     >
+      <DialogTitle id='alert-dialog-title' sx={{color:"#f2f2f2"}}>
+        {"Are  sure to submit your response ? "}
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id='alert-dialog-description'>
+            lorem ipsum dolor sit amet, consectetur adip
+            lorem ipsum dolor sit amet, consectetur adip
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} >No,return</Button>
+        <Button onClick={handleClickSure} >Yes!,sure</Button>
+      </DialogActions>
+     </Dialog>
     </div>
   )
 }
