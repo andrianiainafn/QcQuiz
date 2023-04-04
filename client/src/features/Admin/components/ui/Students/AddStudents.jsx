@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import {TextField} from '@mui/material'
+import {Alert, AlertTitle, TextField} from '@mui/material'
 import {styled } from '@mui/material/styles'
 import axios from 'axios'
 import Select from '@mui/material/Select';
@@ -8,6 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import {InputLabel} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DataContext from '../../../context/AdminContext';
+import { motion } from 'framer-motion';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -30,7 +32,10 @@ const CssTextField = styled(TextField)({
 });
 function AddStudents() {
   const [information,setInformation] = useState({})
-  const {getArrayStudents} = useContext(DataContext)
+  const {getArrayStudents,getArrayOfNotes} = useContext(DataContext)
+  const [error,setError] = useState(false)
+  const [success,setSuccess] = useState()
+  const [message,setMessage] = useState('Somthing went wrong when adding student')
   const navigate = useNavigate()
   const HandleChange = (e)=>{
     const name = e.target.name
@@ -42,17 +47,22 @@ function AddStudents() {
   }
   const HanClickAddStudents = async()=>{
       if (!information.nom || !information.prenom || !information.niveau || !information.adr_email || !information.niveau ){
-            console.log("please Enter the required information")
-            console.log(information)
+            setMessage("Please complete the required information! ")
+            setError(true)
       }
       else{
         const student = await axios.post('http://localhost:8080/Etudiant/create.php',information)
         console.log(student)
         if(student.status === 200){
-          console.log('success')
-          getArrayStudents()
+            if(student.data.status === 200){
+              setSuccess(true)
+              getArrayOfNotes()
+              getArrayStudents()
+            }else{
+              setError(true)    
+            }
         }else{
-          console.log('Failed to create student')
+          setError(true)
         }
       }
   }
@@ -90,12 +100,62 @@ function AddStudents() {
                 </Select>
           </FormControl>
           </div> 
+          {
+            error && (
+              <motion.div
+              initial={
+                {
+                 opacity: 0,
+                 y:-100
+                }
+                }
+                animate={{
+                    opacity:1,
+                    y:0
+                }}
+                transition={
+                    {
+                      duration: 0.7
+                    }
+                }>
+                  <Alert severity='error'  onClose={()=>{setError(false)}}>
+                    <AlertTitle>Error</AlertTitle>
+                    {message}
+                  </Alert>
+              </motion.div>
+            )
+          }
+          {
+            success && (
+              <motion.div
+              initial={
+                {
+                 opacity: 0,
+                 y:-100
+                }
+                }
+                animate={{
+                    opacity:1,
+                    y:0
+                }}
+                transition={
+                    {
+                      duration: 0.7
+                    }
+                }>
+                <Alert severity='success' onClose={()=>{setSuccess(false)}}>
+                    <AlertTitle>Success!</AlertTitle>
+                    Question created successfully!
+                </Alert>
+              </motion.div>
+            )
+          }
           <div className='w-full flex justify-between items-center'>  
             <button onClick={HanClickAddStudents} className="hover:animate-pulse px-3 py-2  border border-[#f2f2f2] bg-[#66ACFF]  rounded-lg text-[#f2f2f2]">
               Add student
             </button>
             <button onClick={HandleClickCancel} className="hover:animate-pulse px-3 py-2 bg-transparent border border-[#66ACFF] rounded-lg text-[#66ACFF]">
-                Cancel
+               <KeyboardBackspaceIcon/> Back
             </button>
           </div>
         </div>

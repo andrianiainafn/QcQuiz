@@ -7,21 +7,26 @@ const ListContext = createContext()
 function StudentContext({children}) {
   const {studentNiveau} = useContext(Context)
   const [exam,setExam] = useState([])
+  const [firstYears,setFirstYears] = useState()
+  const [secondeYears,setSecondYears] = useState()
+  const modifyFirstYears = (newValeu)=>{
+    setFirstYears(newValeu)
+  }
+  const modifySecondYears = (newValeu)=>{
+    setSecondYears(newValeu)
+  }
   const getArrayOfQcm = async()=>{
     const listOfQcm = await axios.get(`http://localhost:8080/Qcm/list.php/${studentNiveau}`)
     if(listOfQcm.status === 200){
       console.log(listOfQcm.data)
       setExam(listOfQcm.data)
-      // const array = listOfQcm.data.map((elem)=>{return elem})
-      // setExam(array)
-      // console.log(exam,9898)
     }
   }
   useEffect(()=>{
         getArrayOfQcm()
   },[])
   return (
-    <ListContext.Provider value={{exam}}>
+    <ListContext.Provider value={{exam,firstYears,secondeYears,modifyFirstYears,modifySecondYears}}>
         {children}
     </ListContext.Provider>
   )

@@ -5,9 +5,11 @@
    header('Access-Control-Allow-Credentials: true');
    header('Access-Control-Allow-Methods: *');
 try{
-    // var_dump($_SESSION);
-    // die();
-    echo json_encode($_SESSION['connected']);
+    if(isset($_SESSION['connected'])){
+        echo json_encode($_SESSION['connected']);
+    }else{
+        echo json_encode(false);
+    }
 }catch(Exception $e){
     echo 'Error: ' . $e->getMessage();
 }

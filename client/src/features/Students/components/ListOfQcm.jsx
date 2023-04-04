@@ -2,10 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import Header from '../element/Header';
 import ListContext from '../StudentContext';
+import axios from 'axios';
+import {motion} from 'framer-motion'
+import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
-  const  {exam} = useContext(ListContext)
+  const  {exam,firstYears,secondeYears} = useContext(ListContext)
   const [note,setNote] = useState(0)
   const [response,setResponse] = useState({
     question1: null,
@@ -119,19 +123,50 @@ function ListOfQcm() {
       })
     }
   },[valueOfScroll])
-  const HandleClikSubmit = ()=>{
-    console.log(response,909090)
-    console.log(exam,7070)
+  const [open,setOpen] = useState(false)
+  const {id} = useParams()
+  const handleClose = ()=>{
+    setNote(0)
+    setOpen(false)
+  }
+  const handleClickSure = async()=>{
+      setOpen(false)
+      const annee_univ = firstYears.toString() + '-' + secondeYears.toString()
+      const information = {note,annee_univ,num_etudiant: id}
+      const response = await axios.post('http://localhost:8080/Note/AddNotes.php',information)
+      if(response.status === 200){
+        console.log(response.data)
+        if(response.data.status === 200){ 
+            console.log('reussi!!')
+            setNote(0)
+        }else{
+          console.log('erreur')
+        }
+      }else{
+        console.log('Error')
+      }
+      // const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
+      // if(sendNotes.status === 200 ){
+      //   if(sendNotes.data.status === 200){
+      //     console.log('success')
+      //     setNote(0)
+      //   }else{
+      //     console.log('error')
+      //   }
+      // }else{
+      //   console.log('grave erreur')
+      // }
+  }
+  const HandleClikSubmit = async()=>{
     for(let i=0;i<10;i++){ 
       const res = 'question' + parseInt(i + 1)
-      console.log(response[res],i)
-      console.log(exam[i].reponse_vrai,i)
-      if(response.res === exam[i].response_vrai){
-          setNote(note=>note+1)
-          console.log(note)
+      const resStudent = response[res]
+      const  resVrai = exam[i].reponse_vrai
+      if(resStudent === resVrai){
+          setNote(ancien=>ancien+1)
+        }
       }
-
-    }
+      setOpen(true) 
   }
   return (
     <div className='relative h-screen bg-[#001E3C] scroll-smooth overflow-y-scroll snap-y snap-mandatory' 
@@ -139,19 +174,33 @@ function ListOfQcm() {
       <div className="fixed flex flex-col space-y-3  h-[24vh] right-16 mt-[11%]">
             {
               numQcm.map((question,key)=>(
-                <div key={key} className=" text-[#38c172] h-8 w-8 border cursor-pointer border-[#38c172] rounded-full flex justify-center items-center ">
+                <motion.div 
+                initial={{
+                  y:-200,
+                  opacity:0
+                }}
+                transition={{
+                  duration:1.5,
+                  delay: 1.7
+                }}
+                animate={{opacity:1,y:0}}
+                key={key} className=" text-[#38c172] h-8 w-8 border cursor-pointer border-[#38c172] rounded-full flex justify-center items-center ">
                   <a href= {'#' + question} >{question}</a>
-                </div>
+                </motion.div>
               ))
             }
       </div>
+      <div className='fixed h-[10vh] w-[5vw] top-[30%] left-[15%] blur rounded-full bg-gradient-to-br from-[#38c172] animate-pulse to-[#1fa1b8]'/>
+      <div className='fixed h-[10vh] w-[5vw] top-[70%] left-[80%] blur rounded-full bg-gradient-to-br from-[#38c172] animate-spin to-[#1fa1b8]'/>
+      <div className='fixed h-[10vh] w-[5vw] top-[80%] left-[5%] blur rounded-full bg-gradient-to-br from-[#38c172] animate-bounce to-[#1fa1b8]'/>
+      {/* </div> */}
       <div className='h-screen snap-start' data-spy>
         <Header/>
       </div>  
      {
       exam.map((elem,key)=>(
         <div key={key} id={key+1} className="flex snap-center w-[80%] mx-auto   flex-col h-screen items-center justify-center bg-[#001E3C] " data-spy>
-        <div className=" text-2xl text-[#f2f2f2] text-start">
+        <div className=" text-2xl z-3 text-[#f2f2f2] text-start">
             <h1>{key + 1}<ArrowRightAltOutlinedIcon/> {elem.question} </h1>
         </div>
         <div className="mt-5 text-xl flex flex-col space-y-2 text-[#f2f2f2]">
@@ -192,6 +241,34 @@ function ListOfQcm() {
       </div>
       ))
      }
+     <Dialog
+     open={open}
+     onClose={handleClose}
+     aria-labelledby="alert-dialog-title"
+     aria-describedby='alert-dialog-description'
+     sx={{
+      "& .MuiDialog-paper":{
+        backgroundColor: "#001E3C"
+      },
+      "& .MuiDialogContentText-root":{
+        color:"#eee"
+      }
+     }}
+     >
+      <DialogTitle id='alert-dialog-title' sx={{color:"#f2f2f2"}}>
+        {"Are  sure to submit your response ? "}
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id='alert-dialog-description'>
+            lorem ipsum dolor sit amet, consectetur adip
+            lorem ipsum dolor sit amet, consectetur adip
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} >No,return</Button>
+        <Button onClick={handleClickSure} >Yes!,sure</Button>
+      </DialogActions>
+     </Dialog>
     </div>
   )
 }

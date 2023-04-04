@@ -17,7 +17,8 @@ function NavBar() {
             opacity:0
           }}
           transition={{
-            duration:1.5
+            duration:1.5,
+            delay: 0.4
           }}
           whileInView={{opacity:1,x:0}}
           viewport={{once:true}}
@@ -27,7 +28,17 @@ function NavBar() {
         <div className="md:hidden text-[#38C172]">
             <MenuIcon/>
         </div>
-        <div className="hidden md:flex w-[20%] justify-between items-center ">
+        <motion.div
+        initial={{
+          y:-100,
+          opacity:0
+        }}
+        transition={{
+          duration:1.5,
+          delay: 0.7
+        }}
+        animate={{opacity:1,y:0}}
+         className="hidden md:flex w-[20%] justify-between items-center ">
           <div className="cursor-pointer text-transparent font-bold bg-clip-text bg-gradient-to-br from-[#d0aa5b] to-[#1fa1b8]">
             <h3>HOME</h3>   
           </div>
@@ -37,14 +48,15 @@ function NavBar() {
           <div className="cursor-pointer text-transparent font-bold bg-clip-text bg-gradient-to-br from-[#d0aa5b] to-[#1fa1b8]">
             <h3>ABOUT</h3>    
           </div>
-        </div>
+        </motion.div>
         <motion.div 
         initial={{
           x:100,
           opacity:0
         }}
         transition={{
-          duration:1.5
+          duration:1.5,
+          delay: 0.4
         }}
         whileInView={{opacity:1,x:0}}
         viewport={{once:true}}    

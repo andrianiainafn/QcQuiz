@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DataContext from '../../context/AdminContext';
 
-function StudentActions({params}) {
+function StudentActions({params,ChangeValueOfSuccess,ChangeValueOfError}) {
     const {getArrayOfStudents} = useContext(DataContext);
     const navigate = useNavigate()
     const HandleClickEdit = ()=>{
@@ -17,10 +17,10 @@ function StudentActions({params}) {
     const deleteQcm = await axios.post(`http://localhost:8080/Etudiant/delete.php/${params.id}`)
     console.log(deleteQcm)
     if(deleteQcm.status === 200){
-        console.log(deleteQcm.data)
+        ChangeValueOfSuccess()
         getArrayOfStudents()
     }else{
-        console.log("Error deleting Qcm",deleteQcm.data)
+        ChangeValueOfError()
     }
   }
   return (

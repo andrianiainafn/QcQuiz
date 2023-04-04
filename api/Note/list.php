@@ -9,7 +9,7 @@
     $pdo = $connect->connect();
 
     try {
-        $query = "SELECT etudiant JOIN exam ON(etudiant.num_etudiant=exam.num_etudiant) order by note desc"; 
+        $query = "SELECT * FROM etudiant JOIN examen ON(etudiant.num_etudiant=examen.num_etudiant) order by note desc"; 
         $stmt = $pdo->prepare($query);
         if ($stmt->execute()){
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
