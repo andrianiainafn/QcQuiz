@@ -26,7 +26,8 @@ function Headers() {
               opacity:0
             }}
             transition={{
-              duration:1.5
+              duration:1.5,
+              delay: 1.3
             }}
             whileInView={{opacity:1,x:0}}
             viewport={{once:true}}

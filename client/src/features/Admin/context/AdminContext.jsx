@@ -23,15 +23,16 @@ function AdminContext({children}) {
       }
       const getArrayOfQcm = async()=>{
         const getQcm = await axios.get('http://localhost:8080/Qcm/listQcm.php')
-        console.log(getQcm,9000)
         if(getQcm.status === 200){
           setArrayOfQcm(getQcm.data)
         }
       }
       const getArrayOfNotes = async()=>{
-        const getNotes = await axios.get('http://localhost:8080/Notes/list.php')
+        const getNotes = await axios.get('http://localhost:8080/Note/list.php')
         if(getNotes.status === 200){
+          console.log(getNotes.data)
           setArrayOfNotes(getNotes.data)
+          console.log(arrayOfNotes,909090)
         }
       }
       useEffect(()=>{

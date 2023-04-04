@@ -1,8 +1,13 @@
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import DataContext from '../../../context/AdminContext';
 
 function Listes() {
+  const {arrayOfNotes} = useContext(DataContext)
+  useEffect(()=>{
+      console.log(arrayOfNotes)
+  },[])
   const columns = [
     { field: 'id', headerName: 'Matricule', width: 80 },
     
@@ -29,7 +34,11 @@ function Listes() {
         width :150,
       }
   ];
-  const rows = [];
+  let rows = arrayOfNotes.map(notes=>{
+    return(
+      { id: notes.num_etudiant, nom: notes.nom, prenom: notes.prenom, niveau: notes.niveau,note:notes.note }
+    )
+  })
   return (
     <div>
     <Box sx={{ height: 450, width: '98%' }}>

@@ -1,9 +1,10 @@
 import { TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 // import { useTypewriter } from 'react-simple-typewriter'
 import NavBar from './NavBar'
 import {  styled } from '@mui/material/styles';
 import {motion} from 'framer-motion'
+import ListContext from '../StudentContext';
 
 const CssTextField = styled(TextField)({
   '& label': {
@@ -28,20 +29,23 @@ const CssTextField = styled(TextField)({
   },
 });
 function Header() {
-  // const[text,count]= useTypewriter({
-    // words:["Welcom ANDRIANIAINA.",
-    // "Are you ready to do it ?","Let's try do it now!"
-    // ],
-    // loop:true,
-    // delaySpeed:900,
-    // typeSpeed: 30
-// })
-const [year, setYear] = useState('');
-const handleYearChange = (event) => {
+const {modifyFirstYears,modifySecondYears} = useContext(ListContext)
+const [firstyear, setFirsrYear] = useState();
+const [secondyear,setSecondsrYear] = useState();
+const handleFirstYearChange = (event) => {
   const { value } = event.target;
   const yearRegex = /^[0-9]{0,4}$/; // regex pour limiter la saisie à 4 chiffres
   if (yearRegex.test(value) || value === '') { // vérifier si la valeur est valide ou non
-    setYear(value);
+    setFirsrYear(value);
+    modifyFirstYears(value)
+  }
+};
+const handleSecondYearChange =  (event) => {
+  const { value } = event.target;
+  const yearRegex = /^[0-9]{0,4}$/; // regex pour limiter la saisie à 4 chiffres
+  if (yearRegex.test(value) || value === '') { // vérifier si la valeur est valide ou non
+    setSecondsrYear(value);
+    modifySecondYears(value)
   }
 };
   return (
@@ -68,7 +72,8 @@ const handleYearChange = (event) => {
           opacity:0
         }}
         transition={{
-          duration:1.5
+          duration:1.5,
+          delay: 1.5
         }}
         animate={{opacity:1,x:0}}        
         className = "relative top-[24vh] flex justify-center">
@@ -80,17 +85,18 @@ const handleYearChange = (event) => {
           opacity:0
         }}
         transition={{
-          duration:1.5
+          duration:1.5,
+          delay: 1
         }}
         animate={{opacity:1,x:0}}
         className='relative top-[26vh] w-full flex justufy-center mx-auto '>
           <div className="  flex justify-between items-center  w-[20%] mx-auto ">
-            <CssTextField onChange={handleYearChange} value={year} className='w-[40%]' variant='outlined' label='year' type='text'   inputProps={{
+            <CssTextField onChange={handleFirstYearChange} value={firstyear} className='w-[40%]' variant='outlined' label='year' type='text'   inputProps={{
             style: { color: '#f2f2f2',height:'2vh' },
             maxLength: 4,
             min: '2021', 
             max: '2023',   }}/>
-            <CssTextField className='w-[40%]' variant='outlined' label='year' type='text'   inputProps={{
+            <CssTextField onChange={handleSecondYearChange} value={secondyear} className='w-[40%]' variant='outlined' label='year' type='text'   inputProps={{
             style: { color: '#f2f2f2',height:'2vh' },
             maxLength: 4,
             min: '2021', 
@@ -103,7 +109,8 @@ const handleYearChange = (event) => {
           opacity:0
         }}
         transition={{
-          duration:1.5
+          duration:1.5,
+          delay: 0.9
         }}
         animate={{opacity:1,x:0}}
            className="relative top-[28vh] flex justify-center">

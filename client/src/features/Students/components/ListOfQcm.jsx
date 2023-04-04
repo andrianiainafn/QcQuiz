@@ -5,10 +5,11 @@ import ListContext from '../StudentContext';
 import axios from 'axios';
 import {motion} from 'framer-motion'
 import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 function ListOfQcm() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
-  const  {exam} = useContext(ListContext)
+  const  {exam,firstYears,secondeYears} = useContext(ListContext)
   const [note,setNote] = useState(0)
   const [response,setResponse] = useState({
     question1: null,
@@ -123,36 +124,46 @@ function ListOfQcm() {
     }
   },[valueOfScroll])
   const [open,setOpen] = useState(false)
+  const {id} = useParams()
   const handleClose = ()=>{
     setNote(0)
     setOpen(false)
   }
   const handleClickSure = async()=>{
-      console.log(note)
       setOpen(false)
-      const information = {note} 
-      const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
-      if(sendNotes.status === 200 ){
-        if(sendNotes.data.status === 200){
-          console.log('success')
-          setNote(0)
+      const annee_univ = firstYears.toString() + '-' + secondeYears.toString()
+      const information = {note,annee_univ,num_etudiant: id}
+      const response = await axios.post('http://localhost:8080/Note/AddNotes.php',information)
+      if(response.status === 200){
+        console.log(response.data)
+        if(response.data.status === 200){ 
+            console.log('reussi!!')
+            setNote(0)
         }else{
-          console.log('error')
+          console.log('erreur')
         }
       }else{
-        console.log('grave erreur')
+        console.log('Error')
       }
+      // const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
+      // if(sendNotes.status === 200 ){
+      //   if(sendNotes.data.status === 200){
+      //     console.log('success')
+      //     setNote(0)
+      //   }else{
+      //     console.log('error')
+      //   }
+      // }else{
+      //   console.log('grave erreur')
+      // }
   }
   const HandleClikSubmit = async()=>{
     for(let i=0;i<10;i++){ 
       const res = 'question' + parseInt(i + 1)
       const resStudent = response[res]
       const  resVrai = exam[i].reponse_vrai
-      console.log('resStudent:',resStudent,'resVrai:',resVrai)
       if(resStudent === resVrai){
-        console.log('test',i)
           setNote(ancien=>ancien+1)
-          console.log(note)
         }
       }
       setOpen(true) 
@@ -169,7 +180,8 @@ function ListOfQcm() {
                   opacity:0
                 }}
                 transition={{
-                  duration:1.5
+                  duration:1.5,
+                  delay: 1.7
                 }}
                 animate={{opacity:1,y:0}}
                 key={key} className=" text-[#38c172] h-8 w-8 border cursor-pointer border-[#38c172] rounded-full flex justify-center items-center ">
