@@ -2,50 +2,58 @@
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/src/PHPMailer.php';
+require '../PHPMailer-master/src/SMTP.php';
 require('../ConnectToDb.php');
 
  $connect = new ConnectToDb();
  $pdo = $connect->connect();
 try {
-    // Récupération de la note de l'examen pour l'étudiant donné
-$num_etudiant = $_GET['num'];
-; // num de l'étudiant dont on veut récupérer la note
-$query = "SELECT note FROM examen WHERE num_etudiant = :num_etudiant";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':num_etudiant', $num_etudiant);
-$stmt->execute();
+    $req="SELECT adr_email FROM etudiant WHERE num_etudiant";
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+ 
+    $mail = new PHPMailer(true);
+$mail->SMTPDebug = 2;
+$mail->IsSMTP();
+$mail->Host = 'auth.smtp.1and1.fr';            
+$mail->Port = 465;                          
+$mail->SMTPAuth = 1;                        
 
-$resultat = $stmt->fetch(PDO::FETCH_ASSOC);
-if (!$resultat) {
-    die("La requête a échoué.");
+if($mail->SMTPAuth){
+   $mail->SMTPSecure = 'ssl';               
+   $mail->Username   =  'loharanontsoasnael@gmail.com';  
+   $mail->Password   =  'eoaMODSODGODGOD05';         
+}
+$mail->CharSet = 'UTF-8'; 
+$mail->smtpConnect();
+$mail->From       =  'loharanontsoasnael@gmail.com';               
+$mail->FromName   = 'loharanontsoasnael@gmail.com';             
+
+
+$note=10;
+$mail->AddAddress('sinaandraina@gmail.com','SINA');
+$mail->Subject    =  'Mon sujet';                     
+$mail->WordWrap   = 50; 			                   
+$mail->AltBody = "Votre note est : $note"; 	       
+$mail->IsHTML(false);                                  
+
+if($Use_HTML == true){
+    $mail->MsgHTML('<div>Votre note QCM <code>HTML</code></div>'); 		                
+    $mail->IsHTML(true);
+ }
+
+if (!$mail->send()) {
+    echo $mail->ErrorInfo;
+} else{
+    echo 'Message bien envoyé';
 }
 
-$note = $resultat['note'];
-
-// Récupération de l'adresse e-mail de l'étudiant
-$query = "SELECT adr_email FROM etudiants WHERE num = :num_etudiant";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':num_etudiant', $num_etudiant);
-$stmt->execute();
-
-$resultat = $stmt->fetch(PDO::FETCH_ASSOC);
-if (!$resultat) {
-    die("La requête a échoué.");
-}
-
-$adr_email = $resultat['adr_email'];
-
-// Envoi de l'e-mail contenant la note de l'examen
-$sujet = "Résultat de l'examen";
-$message = "Votre note est : $note";
-$headers = "From: loharanontsoasnael@gmail.com";
-
-if (mail($adr_email, $sujet, $message, $headers)) {
-    echo "L'e-mail a éte envoye avec succes.";
-}else{
-    echo"ERREUR";
-}
-} catch (PDOException $e) {
+} catch (Exception $e) {
     die("La connexion a échoué : " . $e->getMessage());
 }
 
