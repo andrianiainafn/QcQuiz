@@ -4,12 +4,14 @@ import Header from '../element/Header';
 import ListContext from '../StudentContext';
 import axios from 'axios';
 import {motion} from 'framer-motion'
-import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
+import { Alert, AlertTitle, Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
 import { useParams } from 'react-router-dom';
+// import  DataContext from '../../Admin/context/AdminContext';
 
-function ListOfQcm() {
+function ListOfQcmExam() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
   const  {exam,firstYears,secondeYears} = useContext(ListContext)
+  // const {getArrayOfNotes} = useContext(DataContext)
   const [note,setNote] = useState(0)
   const [response,setResponse] = useState({
     question1: null,
@@ -129,6 +131,8 @@ function ListOfQcm() {
     setNote(0)
     setOpen(false)
   }
+  const [error,setError] = useState(false)
+  const [success,setSuccess] = useState()
   const handleClickSure = async()=>{
       setOpen(false)
       const annee_univ = firstYears.toString() + '-' + secondeYears.toString()
@@ -137,25 +141,24 @@ function ListOfQcm() {
       if(response.status === 200){
         console.log(response.data)
         if(response.data.status === 200){ 
-            console.log('reussi!!')
-            setNote(0)
+          // getArrayOfNotes()  
+          setNote(0)
+            const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
+            if(sendNotes.status === 200 ){
+              if(sendNotes.data.status === 200){
+                setSuccess(true)
+              }else{
+                setError(false)
+              }
+            }else{
+              setError(false)
+            }
         }else{
-          console.log('erreur')
+          setError(false)
         }
       }else{
-        console.log('Error')
+        setError(false)
       }
-      // const sendNotes = await axios.post('http://localhost:8080/Etudiant/EmailSend.php',information)
-      // if(sendNotes.status === 200 ){
-      //   if(sendNotes.data.status === 200){
-      //     console.log('success')
-      //     setNote(0)
-      //   }else{
-      //     console.log('error')
-      //   }
-      // }else{
-      //   console.log('grave erreur')
-      // }
   }
   const HandleClikSubmit = async()=>{
     for(let i=0;i<10;i++){ 
@@ -236,8 +239,59 @@ function ListOfQcm() {
           <div  onClick={HandleClikSubmit} className='hover:text-[#f2f2f2] hover:bg-[#38c172] mt-10 text-[#38c172] w-[20%] p-2 cursor-pointer border border-[#38c172] flex justify-center items-center rounded-3xl' >
             Submit Response
          </div>
+         
           )
         }
+        {
+          key + 1 === 10 &&  error && (
+              <motion.div
+              initial={
+                {
+                 opacity: 0,
+                 y:-100
+                }
+                }
+                animate={{
+                    opacity:1,
+                    y:0
+                }}
+                transition={
+                    {
+                      duration: 0.7
+                    }
+                }>
+                  <Alert severity='error'  onClose={()=>{setError(false)}}>
+                    <AlertTitle>Error</AlertTitle>
+                    Error when sending email
+                  </Alert>
+              </motion.div>
+            )
+          }
+          {
+            key + 1 === 10 && success && (
+              <motion.div
+              initial={
+                {
+                 opacity: 0,
+                 y:-100
+                }
+                }
+                animate={{
+                    opacity:1,
+                    y:0
+                }}
+                transition={
+                    {
+                      duration: 0.7
+                    }
+                }>
+                <Alert severity='success' onClose={()=>{setSuccess(false)}}>
+                    <AlertTitle>Success!</AlertTitle>
+                     Exam successfully, you received  note in your email !
+                </Alert>
+              </motion.div>
+            )
+          }
       </div>
       ))
      }
@@ -270,7 +324,8 @@ function ListOfQcm() {
       </DialogActions>
      </Dialog>
     </div>
+    
   )
 }
 
-export default ListOfQcm
+export default ListOfQcmExam
