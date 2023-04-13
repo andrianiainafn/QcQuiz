@@ -7,8 +7,6 @@ import QcmAction from '../../elements/QcmAction';
 import { Alert, AlertTitle } from '@mui/material';
 import {motion} from 'framer-motion'
 
-
-
 export default function ListOfQcm() {
   const [success,setSuccess] = useState(false)
   const [error,setError] = useState(false)

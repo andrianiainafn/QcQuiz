@@ -13,6 +13,7 @@ import Line from '../features/Admin/components/ui/Students/Line'
 import ListOfStudents from '../features/Admin/components/ui/Students/ListOfStudents'
 import Pie from '../features/Admin/components/ui/Students/Pie'
 import DashboardLayout from '../page/Admin/DashboardLayout'
+// import ListOfQcmExam from '../features/Students/components/ListOfQcmExam'
 
 function AdminLayout() {
   return (
@@ -30,6 +31,7 @@ function AdminLayout() {
             <Route path='bar' element={<Bar/>}/>
             <Route path='line' element={<Line/>}/>
             <Route path='pie' element={<Pie/>}/>
+            {/* <Route path='test' element={<ListOfQcmExam/>}/> */}
         </Route>
     </Routes>
   )
