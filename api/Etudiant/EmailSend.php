@@ -18,6 +18,8 @@ require('../ConnectToDb.php');
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
+$note = 10;
+
 
 try {
     $mail->SMTPDebug = 0;
@@ -31,7 +33,7 @@ try {
 
     //Recipients
     $mail->setFrom('fanomezantsoanomenandrianiaina@gmail.com', 'QCM Quizz');
-    $mail->addAddress('sinaandraina@gmail.com', 'Joe User');     //Add a recipient
+    $mail->addAddress('sinaandraina@gmail.com', 'chers Etudiants');     //Add a recipient
     $mail->addAddress('sinaandraina@gmail.com');               //Name is optional
     $mail->addReplyTo('sinaandraina@gmail.com', 'Information');
     $mail->addCC('sinaandraina@gmail.com');
@@ -40,9 +42,9 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'Votre note en examen QCM</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = 'Note examen en QCM';
+    $mail->Body    = "Votre note en examen QCM est $note</b>";
+    $mail->AltBody = 'cher Etudiants,Votre Note en examen QCM Sur QCM Quizz ';
 
     $mail->send();
     echo 'Message has been sent';
