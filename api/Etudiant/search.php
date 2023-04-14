@@ -10,9 +10,10 @@
     try{
         $path = explode('/', $_SERVER['REQUEST_URI']);
             if(isset($path[3])){
-                $query = "SELECT * FROM etudiant WHERE nom LIKE '%:nom%' OR matricule LIKE '%:matricule%'";
+                $keyword = '%' . $path[3] . '%';
+                $query = "SELECT * FROM etudiant WHERE nom LIKE :keyword OR num_etudiant LIKE :keyword";
                 $stmt = $pdo->prepare($query);
-                $stmt->bindParam(':nom',$path[3]);
+                $stmt->bindParam(':keyword', $keyword);
                 if($stmt->execute()){
                     $result = $stmt->fetchAll();
                     echo json_encode($result);
