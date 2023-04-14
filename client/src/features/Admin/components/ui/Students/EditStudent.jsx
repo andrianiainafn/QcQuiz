@@ -42,7 +42,7 @@ function EditStudent() {
     setPrenom(e.target.value)
   }
   const HandleChangeEmail = (e)=>{
-    setEmail(adr_email)
+    setEmail(e.target.value)
   }
   const HanClickAddStudents = async()=>{
       const information ={
