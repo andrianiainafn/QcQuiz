@@ -39,11 +39,11 @@ function SIdbarC() {
       title: 'Lists Notes',
       icon: <ContactsOutlinedIcon sx={{color: "#66ACFF"}}/>,      
     },
-    {
-      link: '/admin/dashboard/faq',
-      title: 'FAQ Page',
-      icon: <HelpOutlineOutlinedIcon sx={{color: "#66ACFF"}}/>,
-    },
+    // {
+    //   link: '/admin/dashboard/faq',
+    //   title: 'FAQ Page',
+    //   icon: <HelpOutlineOutlinedIcon sx={{color: "#66ACFF"}}/>,
+    // },
     {
       link: '/admin/dashboard/bar',
       title: 'Bar Chart',
