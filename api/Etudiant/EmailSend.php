@@ -13,7 +13,7 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 require('../ConnectToDb.php');
-//Load Composer's autoloader
+
 
 
 //Create an instance; passing `true` enables exceptions
@@ -33,8 +33,8 @@ try {
 
     //Recipients
     $mail->setFrom('fanomezantsoanomenandrianiaina@gmail.com', 'QCM Quizz');
-    $mail->addAddress('sinaandraina@gmail.com', 'chers Etudiants');     //Add a recipient
-    $mail->addAddress('sinaandraina@gmail.com');               //Name is optional
+    $mail->addAddress('sinaandraina@gmail.com', 'chers Etudiants');     
+    $mail->addAddress('sinaandraina@gmail.com');               
     $mail->addReplyTo('sinaandraina@gmail.com', 'Information');
     $mail->addCC('sinaandraina@gmail.com');
     $mail->addBCC('sinaandraina@gmail.com');
