@@ -18,10 +18,19 @@ require('../ConnectToDb.php');
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$note = 10;
-
+$connect = new ConnectToDb();
+$pdo = $connect->connect();
 
 try {
+    $student_info = json_decode(file_get_contents('php://input'));
+    $note= $student_info->note;
+    $query= "SELECT adr_email FROM etudiant WHERE num_etudiant = matricule";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':num_etudiant',$student_info->num_etudiant);
+    if($stmt->execute()){
+        $result = $stmt->fetchAll();
+        $email = $result[0]->adr_email;
+    }
     $mail->SMTPDebug = 0;
     $mail->isSMTP();
     $mail->Host     = 'smtp.gmail.com';
@@ -33,11 +42,9 @@ try {
 
     //Recipients
     $mail->setFrom('fanomezantsoanomenandrianiaina@gmail.com', 'QCM Quizz');
-    $mail->addAddress('sinaandraina@gmail.com', 'chers Etudiants');     
-    $mail->addAddress('sinaandraina@gmail.com');               
-    $mail->addReplyTo('sinaandraina@gmail.com', 'Information');
-    $mail->addCC('sinaandraina@gmail.com');
-    $mail->addBCC('sinaandraina@gmail.com');
+    $mail->addAddress($email, 'chers Etudiants');     //Add a recipient
+    $mail->addAddress($email);               //Name is optional
+    $mail->addReplyTo($email, 'Information');
 
 
     //Content
