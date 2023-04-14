@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import {  styled } from '@mui/material/styles';
 import {motion} from 'framer-motion'
 import ListContext from '../StudentContext';
+import Context from '../../../context/AuthContext';
 
 const CssTextField = styled(TextField)({
   '& label': {
@@ -32,6 +33,7 @@ function Header() {
 const {modifyFirstYears,modifySecondYears} = useContext(ListContext)
 const [firstyear, setFirsrYear] = useState();
 const [secondyear,setSecondsrYear] = useState();
+const {studentName} = useContext(Context)
 const handleFirstYearChange = (event) => {
   const { value } = event.target;
   const yearRegex = /^[0-9]{0,4}$/; // regex pour limiter la saisie à 4 chiffres
@@ -62,7 +64,7 @@ const handleSecondYearChange =  (event) => {
         animate={{opacity:1,transform: 'scale(1)'}}
         className=" relative flex justify-center items-center top-[22vh]">
             <h3 className="text-2xl text-[#66ACFF] text-center">
-              Welcom ANDRIANIAINA <br/>
+              Welcome <span className="uppercase">{studentName}</span> <br/>
               Are you ready to do it ?,Let's try do it now!
             </h3>
         </motion.div>
@@ -77,7 +79,7 @@ const handleSecondYearChange =  (event) => {
         }}
         animate={{opacity:1,x:0}}        
         className = "relative top-[24vh] flex justify-center">
-          <h3 className=" text-xl text-[#f2f2f2] ">Entrer l' annee universitaire:</h3>
+          <h3 className=" text-xl text-[#f2f2f2] ">Please enter the academic year :</h3>
         </motion.div>
         <motion.div 
         initial={{
