@@ -12,6 +12,7 @@ import History from '../features/Admin/components/ui/Students/History'
 import Line from '../features/Admin/components/ui/Students/Line'
 import ListOfStudents from '../features/Admin/components/ui/Students/ListOfStudents'
 import Pie from '../features/Admin/components/ui/Students/Pie'
+import Search from '../features/Admin/components/ui/Students/Search'
 import DashboardLayout from '../page/Admin/DashboardLayout'
 // import ListOfQcmExam from '../features/Students/components/ListOfQcmExam'
 
@@ -24,6 +25,7 @@ function AdminLayout() {
             <Route path='student/notes' element={<Listes/>}/>
             <Route path='student/byLevel' element={<ByLevel/>}/>
             <Route path='student/create' element={<AddStudents/>}/>
+            <Route path='student/search' element={<Search/>}/>
             <Route path='student/:id/edit' element={<EditStudent/>}/>
             <Route path='qcm/list' element={<ListOfQcm/>}/>
             <Route path='qcm/create' element={<AddQcm/>}/>
