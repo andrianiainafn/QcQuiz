@@ -12,6 +12,7 @@ function ListOfQcmExam() {
   const numQcm = [1,2,3,4,5,6,7,8,9,10]
   const  {exam,firstYears,secondeYears} = useContext(ListContext)
   // const {getArrayOfNotes} = useContext(DataContext)
+  
   const [note,setNote] = useState(0)
   const [response,setResponse] = useState({
     question1: null,
