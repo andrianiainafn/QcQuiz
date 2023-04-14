@@ -9,8 +9,8 @@ function Listes() {
       console.log(arrayOfNotes)
   },[])
   const columns = [
-    { field: 'id', headerName: 'Matricule', width: 80 },
-    
+    { field: 'id', headerName: 'Rank', width: 80 },
+    { field: 'matricule', headerName: 'Matricule', width: 80 },
     {
       field: 'nom',
       headerName: 'First name',
@@ -26,17 +26,18 @@ function Listes() {
       field: 'niveau',
       headerName: 'Niveau',
       type: 'string',
-      width: 210,
+      width: 170,
     },
       {
         field:'note',
         headerName:'Notes',
-        width :150,
+        width :110,
       }
   ];
+  let i = 1
   let rows = arrayOfNotes.map(notes=>{
     return(
-      { id: notes.num_etudiant, nom: notes.nom, prenom: notes.prenom, niveau: notes.niveau,note:notes.note }
+      { id: i++,matricule:notes.num_etudiant ,nom: notes.nom, prenom: notes.prenom, niveau: notes.niveau,note:notes.note }
     )
   })
   return (
